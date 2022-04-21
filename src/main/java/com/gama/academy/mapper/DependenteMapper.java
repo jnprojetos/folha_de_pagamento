@@ -6,7 +6,7 @@ import com.gama.academy.model.Dependente;
 public class DependenteMapper {
 
     public static Dependente toDependente(DependenteDTO dependenteDTO){
-        return new Dependente(null, dependenteDTO.getNome(), dependenteDTO.getCpf(), dependenteDTO.getDataNascimento());
+        return new Dependente(dependenteDTO.getId(), dependenteDTO.getNome(), dependenteDTO.getCpf(), dependenteDTO.getDataNascimento());
     }
 
     public static DependenteDTO toDependenteDTO(Dependente dependente){
