@@ -9,8 +9,6 @@ import javax.validation.constraints.NotNull;
 
 public class EmpresaDTO {
 
-    public Endereco getEndereco;
-
     private Long id;
 
     @NotBlank(message = "Nome Fantasia: ")
@@ -21,6 +19,8 @@ public class EmpresaDTO {
 
     @CNPJ(message = "CNPJ: ")
     private String cnpj;
+
+    private Endereco endereco;
 
     @Email(message = "Email: ")
     private String email;
@@ -35,7 +35,7 @@ public class EmpresaDTO {
         this.cnpj = cnpj;
         this.email = email;
         this.telefone = telefone;
-        this.getEndereco = endereco;
+        this.endereco = endereco;
 
     }
 
@@ -87,7 +87,11 @@ public class EmpresaDTO {
         this.telefone = telefone;
     }
 
-    public Endereco getGetEndereco() {
-        return getEndereco;
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }
