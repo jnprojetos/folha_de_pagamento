@@ -1,6 +1,6 @@
 package com.gama.academy.enums;
 
-public enum TipoRubrica {
+public enum EnumTipoRubrica {
 
     PROVENTO, DESCONTO
 }

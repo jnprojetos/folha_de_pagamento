@@ -1,6 +1,6 @@
 package com.gama.academy.dto;
 
-import com.gama.academy.enums.TipoRubrica;
+import com.gama.academy.enums.EnumTipoRubrica;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -13,12 +13,12 @@ public class RubricaDTO {
     private String descricao;
 
     @NotBlank(message = "Tipo obrigatorio")
-    private TipoRubrica tipo;
+    private EnumTipoRubrica tipo;
 
     @NotNull(message = "Referencia obrigatorio")
     private BigDecimal referencia;
 
-    public RubricaDTO(Long id, String descricao, TipoRubrica tipo, BigDecimal referencia) {
+    public RubricaDTO(Long id, String descricao, EnumTipoRubrica tipo, BigDecimal referencia) {
         this.id = id;
         this.descricao = descricao;
         this.tipo = tipo;
@@ -41,11 +41,11 @@ public class RubricaDTO {
         this.descricao = descricao;
     }
 
-    public TipoRubrica getTipo() {
+    public EnumTipoRubrica getTipo() {
         return tipo;
     }
 
-    public void setTipo(TipoRubrica tipo) {
+    public void setTipo(EnumTipoRubrica tipo) {
         this.tipo = tipo;
     }
 

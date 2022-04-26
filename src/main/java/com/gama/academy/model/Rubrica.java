@@ -1,6 +1,6 @@
 package com.gama.academy.model;
 
-import com.gama.academy.enums.TipoRubrica;
+import com.gama.academy.enums.EnumTipoRubrica;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -14,14 +14,14 @@ public class Rubrica {
     private String descricao;
 
     @Enumerated(EnumType.STRING)
-    private TipoRubrica tipo;
+    private EnumTipoRubrica tipo;
 
     private BigDecimal referencia;
 
 
     public Rubrica(){};
 
-    public Rubrica(Long id, String descricao, TipoRubrica tipo, BigDecimal referencia) {
+    public Rubrica(Long id, String descricao, EnumTipoRubrica tipo, BigDecimal referencia) {
         this.id = id;
         this.descricao = descricao;
         this.tipo = tipo;
@@ -44,11 +44,11 @@ public class Rubrica {
         this.descricao = descricao;
     }
 
-    public TipoRubrica getTipo() {
+    public EnumTipoRubrica getTipo() {
         return tipo;
     }
 
-    public void setTipo(TipoRubrica tipo) {
+    public void setTipo(EnumTipoRubrica tipo) {
         this.tipo = tipo;
     }
 
