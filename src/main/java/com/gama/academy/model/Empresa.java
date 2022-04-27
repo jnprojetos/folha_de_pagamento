@@ -1,9 +1,6 @@
 package com.gama.academy.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -18,6 +15,7 @@ public class Empresa {
     private String cnpj;
     private String email;
     private String telefone;
+    @ManyToOne
     private Endereco endereco;
 
     public Empresa() {
