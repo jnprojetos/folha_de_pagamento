@@ -4,6 +4,7 @@ import com.gama.academy.dto.RubricaDTO;
 import com.gama.academy.mapper.RubricaMapper;
 import com.gama.academy.model.Rubrica;
 import com.gama.academy.repository.RubricaRepository;
+import org.apache.catalina.valves.rewrite.InternalRewriteMap;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class RubricaService {
     private RubricaRepository rubricaRepository;
 
     public RubricaDTO novaRubrica(RubricaDTO rubricaDTO){
-        return RubricaMapper.toRubricaDTO(rubricaRepository.save(RubricaMapper.toRubrica(rubricaDTO)));
+         return RubricaMapper.toRubricaDTO(rubricaRepository.save(RubricaMapper.toRubrica(rubricaDTO)));
     }
 
     public List<RubricaDTO> listar(){

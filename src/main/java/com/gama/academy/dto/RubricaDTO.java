@@ -44,7 +44,7 @@ public class RubricaDTO {
         this.descricao = descricao;
     }
 
-    public EnumTipoRubrica getTipo() {
+    public EnumTipoRubrica  getTipo() {
         return tipo;
     }
 
