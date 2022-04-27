@@ -19,7 +19,7 @@ public class EmpresaDTO {
     @CNPJ(message = "CNPJ: ")
     private String cnpj;
 
-    private Endereco endereco;
+    private EnderecoDTO endereco;
 
     @Email(message = "Email: ")
     private String email;
@@ -27,7 +27,7 @@ public class EmpresaDTO {
     @NotNull(message = "Tefone: ")
     private String telefone;
 
-    public EmpresaDTO(Long id, String nomeFantasia, String razaoSocial, String cnpj, String email, String telefone, Endereco endereco) {
+    public EmpresaDTO(Long id, String nomeFantasia, String razaoSocial, String cnpj, String email, String telefone, EnderecoDTO endereco) {
         this.id = id;
         this.nomeFantasia = nomeFantasia;
         this.razaoSocial = razaoSocial;
@@ -86,11 +86,11 @@ public class EmpresaDTO {
         this.telefone = telefone;
     }
 
-    public Endereco getEndereco() {
+    public EnderecoDTO getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(Endereco endereco) {
+    public void setEndereco(EnderecoDTO endereco) {
         this.endereco = endereco;
     }
 }

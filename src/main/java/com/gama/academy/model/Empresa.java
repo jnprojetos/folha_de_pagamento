@@ -6,7 +6,6 @@ import java.util.Objects;
 @Entity
 public class Empresa {
 
-    public Endereco getEndereco;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,7 +14,8 @@ public class Empresa {
     private String cnpj;
     private String email;
     private String telefone;
-    @ManyToOne
+
+    @OneToOne
     private Endereco endereco;
 
     public Empresa() {
@@ -87,9 +87,6 @@ public class Empresa {
         return telefone;
     }
 
-    public Endereco getGetEndereco() {
-        return getEndereco;
-    }
 
 
     @Override
