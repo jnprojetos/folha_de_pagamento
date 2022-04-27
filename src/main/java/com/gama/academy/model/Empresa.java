@@ -93,6 +93,7 @@ public class Empresa {
         return getEndereco;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
