@@ -1,61 +1,58 @@
-package com.gama.academy.model;
+package com.gama.academy.dto;
 
 import com.gama.academy.enums.TipoConta;
 import com.gama.academy.enums.UnidadeSalarial;
 
-import javax.persistence.*;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Entity
-public class Funcionario {
+public class FuncionarioDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+
+    @NotBlank(message = "É necessário informar o nome")
     private String nome;
-    @NotNull
+    @NotNull(message = "É necessário informar a data de nascimento")
     private LocalDate dataNascimento;
-    @NotBlank
+    @NotBlank(message = "É necessário informar o cpf")
     private String cpf;
-    @NotBlank
+    @NotBlank(message = "É necessário informar a matrícula")
     private String matricula;
-    @NotBlank
+    @NotBlank(message = "É necessário informar o telefone")
     private String telefone;
-    @NotBlank
+    @NotBlank(message = "É necessário informar o e-mail")
     private String email;
-    @NotNull
+    @NotNull(message = "É necessário informar a data de admissão")
     private LocalDate dataAdmissao;
     private LocalDate dataDesligamento;
-    @NotNull
+    @NotNull(message = "É necessário informar o status")
     private boolean ativo = true;
 
-    //private Cargo cargo;
-    @NotNull
+    /*@NotNull(message = "É necessário informar o cargo do funcionario")
+    private Long idCargo;*/
+    @NotNull (message = "É necessário informar a unidade salarial")
     @Enumerated(EnumType.STRING)
     private UnidadeSalarial unidadeSalarial = UnidadeSalarial.MENSAL;
-    @NotNull
+    @NotNull(message = "É necessário informar o salário atual")
     private BigDecimal salarioAtual = BigDecimal.ZERO;
 
-    @NotBlank
+    @NotBlank(message = "É necessário informar o número da conta")
     private String numeroConta;
-    @NotBlank
+    @NotBlank(message = "É necessário informar a agência da conta")
     private String agenciaConta;
-    @NotNull
+    @NotNull (message = "É necessário informar o tipo da conta")
     @Enumerated(EnumType.STRING)
     private TipoConta tipoConta;
-    @NotBlank
+    @NotBlank(message = "É necessário informar o código do banco")
     private String codigoBanco;
 
-    public Funcionario() {
-    }
-
-    public Funcionario(Long id, String nome, LocalDate dataNascimento, String cpf, String matricula, String telefone, String email, LocalDate dataAdmissao,
-                       boolean ativo, UnidadeSalarial unidadeSalarial, BigDecimal salarioAtual, String numeroConta, String agenciaConta, TipoConta tipoConta, String codigoBanco) {
+    public FuncionarioDTO(Long id, String nome, LocalDate dataNascimento, String cpf, String matricula, String telefone, String email, LocalDate dataAdmissao,
+                          boolean ativo, UnidadeSalarial unidadeSalarial, BigDecimal salarioAtual, String numeroConta, String agenciaConta, TipoConta tipoConta, String codigoBanco) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
