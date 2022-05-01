@@ -1,5 +1,6 @@
 package com.gama.academy.dto;
 
+import com.gama.academy.model.Endereco;
 import org.hibernate.validator.constraints.br.CNPJ;
 
 import javax.validation.constraints.Email;

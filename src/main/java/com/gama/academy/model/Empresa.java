@@ -1,14 +1,13 @@
 package com.gama.academy.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 public class Empresa {
 
+    @OneToOne
+    @JoinColumn(name = "get_endereco_id")
     public Endereco getEndereco;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +17,8 @@ public class Empresa {
     private String cnpj;
     private String email;
     private String telefone;
+    @OneToOne
+    @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
     public Empresa() {
