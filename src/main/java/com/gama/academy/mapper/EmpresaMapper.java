@@ -7,12 +7,12 @@ public class EmpresaMapper {
 
     public static Empresa toEmpresa(EmpresaDTO empresaDTO){
         return new Empresa(empresaDTO.getId(), empresaDTO.getNomeFantasia(), empresaDTO.getRazaoSocial(), empresaDTO.getCnpj(),
-                empresaDTO.getEmail(), empresaDTO.getTelefone(), empresaDTO.getEndereco());
+                empresaDTO.getEmail(), empresaDTO.getTelefone(), EnderecoMapper.toEndereco(empresaDTO.getEndereco()));
     }
 
     public static Empresa toEmpresaDTO(Empresa empresa){
         return new Empresa(empresa.getId(), empresa.getNomeFantasia(), empresa.getRazaoSocial(), empresa.getCnpj(),
-                empresa.getEmail(), empresa.getTelefone(), empresa.getEndereco);
+                empresa.getEmail(), empresa.getTelefone(), empresa.getEndereco());
     }
 
 }

@@ -18,11 +18,14 @@ public class RubricaDTO {
     @NotNull(message = "Referencia obrigatorio")
     private BigDecimal referencia;
 
-    public RubricaDTO(Long id, String descricao, EnumTipoRubrica tipo, BigDecimal referencia) {
+    private BigDecimal adiconalHora;
+
+    public RubricaDTO(Long id, String descricao, EnumTipoRubrica tipo, BigDecimal referencia, BigDecimal adiconalHora) {
         this.id = id;
         this.descricao = descricao;
         this.tipo = tipo;
         this.referencia = referencia;
+        this.adiconalHora = adiconalHora;
     }
 
     public Long getId() {
@@ -41,7 +44,7 @@ public class RubricaDTO {
         this.descricao = descricao;
     }
 
-    public EnumTipoRubrica getTipo() {
+    public EnumTipoRubrica  getTipo() {
         return tipo;
     }
 
@@ -55,5 +58,13 @@ public class RubricaDTO {
 
     public void setReferencia(BigDecimal referencia) {
         this.referencia = referencia;
+    }
+
+    public BigDecimal getAdiconalHora() {
+        return adiconalHora;
+    }
+
+    public void setAdiconalHora(BigDecimal adiconalHora) {
+        this.adiconalHora = adiconalHora;
     }
 }

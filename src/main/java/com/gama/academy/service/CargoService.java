@@ -27,7 +27,7 @@ public class CargoService {
     }
 
     public CargoDTO alterar(Long id, CargoDTO cargoDTO) {
-        Cargo cargo = cargoRepository.findById(id).orElseThrow(()-> new RuntimeException("Cargo não encontrado"));
+        Cargo cargo = cargoRepository.findById(id).orElseThrow(()-> new RuntimeException("Cargo não encontrad"));
         cargoDTO.setId(cargo.getId());
         return CargoMapper.toCargoDTO(cargoRepository.save(CargoMapper.toCargo(cargoDTO)));
     }

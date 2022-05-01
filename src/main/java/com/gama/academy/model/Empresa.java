@@ -6,9 +6,12 @@ import java.util.Objects;
 @Entity
 public class Empresa {
 
+<<<<<<< HEAD
     @OneToOne
     @JoinColumn(name = "get_endereco_id")
     public Endereco getEndereco;
+=======
+>>>>>>> be01d4788291a3b8a1638e2d9dc98d86c203f963
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,8 +20,13 @@ public class Empresa {
     private String cnpj;
     private String email;
     private String telefone;
+<<<<<<< HEAD
     @OneToOne
     @JoinColumn(name = "endereco_id")
+=======
+
+    @OneToOne
+>>>>>>> be01d4788291a3b8a1638e2d9dc98d86c203f963
     private Endereco endereco;
 
     public Empresa() {
@@ -90,9 +98,6 @@ public class Empresa {
         return telefone;
     }
 
-    public Endereco getGetEndereco() {
-        return getEndereco;
-    }
 
 
     @Override
