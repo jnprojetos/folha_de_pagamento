@@ -5,7 +5,6 @@ import com.gama.academy.enums.UnidadeSalarial;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -34,7 +33,8 @@ public class Funcionario {
     @NotNull
     private boolean ativo = true;
 
-    //private Cargo cargo;
+    @ManyToOne
+    private Cargo cargo;
     @NotNull
     @Enumerated(EnumType.STRING)
     private UnidadeSalarial unidadeSalarial = UnidadeSalarial.MENSAL;
@@ -55,7 +55,7 @@ public class Funcionario {
     }
 
     public Funcionario(Long id, String nome, LocalDate dataNascimento, String cpf, String matricula, String telefone, String email, LocalDate dataAdmissao,
-                       boolean ativo, UnidadeSalarial unidadeSalarial, BigDecimal salarioAtual, String numeroConta, String agenciaConta, TipoConta tipoConta, String codigoBanco) {
+        boolean ativo, UnidadeSalarial unidadeSalarial, BigDecimal salarioAtual, String numeroConta, String agenciaConta, TipoConta tipoConta, String codigoBanco) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -71,6 +71,7 @@ public class Funcionario {
         this.agenciaConta = agenciaConta;
         this.tipoConta = tipoConta;
         this.codigoBanco = codigoBanco;
+        this.cargo = cargo;
     }
 
     public Long getId() {
@@ -199,5 +200,13 @@ public class Funcionario {
 
     public void setCodigoBanco(String codigoBanco) {
         this.codigoBanco = codigoBanco;
+    }
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
     }
 }

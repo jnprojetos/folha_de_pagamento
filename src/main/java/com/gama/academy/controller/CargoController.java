@@ -2,7 +2,6 @@ package com.gama.academy.controller;
 
 
 import com.gama.academy.dto.CargoDTO;
-import com.gama.academy.repository.CargoRepository;
 import com.gama.academy.service.CargoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cargo")
+@RequestMapping("/cargos")
 public class CargoController {
 
     @Autowired

@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -14,13 +15,13 @@ public class Cargo {
     private Long id;
     private String cbo;
     private String descricao;
-    private double pisoSalarial;
-    private double tetoSalarial;
+    private BigDecimal pisoSalarial;
+    private BigDecimal tetoSalarial;
 
     public Cargo() {
     }
 
-    public Cargo(Long id, String cbo, String descricao, double pisoSalarial, double tetoSalarial) {
+    public Cargo(Long id, String cbo, String descricao, BigDecimal pisoSalarial, BigDecimal tetoSalarial) {
         this.id = id;
         this.cbo = cbo;
         this.descricao = descricao;
@@ -52,19 +53,19 @@ public class Cargo {
         this.descricao = descricao;
     }
 
-    public double getPisoSalarial() {
+    public BigDecimal getPisoSalarial() {
         return pisoSalarial;
     }
 
-    public void setPisoSalarial(double pisoSalarial) {
+    public void setPisoSalarial(BigDecimal pisoSalarial) {
         this.pisoSalarial = pisoSalarial;
     }
 
-    public double getTetoSalarial() {
+    public BigDecimal getTetoSalarial() {
         return tetoSalarial;
     }
 
-    public void setTetoSalarial(double tetoSalarial) {
+    public void setTetoSalarial(BigDecimal tetoSalarial) {
         this.tetoSalarial = tetoSalarial;
     }
 
