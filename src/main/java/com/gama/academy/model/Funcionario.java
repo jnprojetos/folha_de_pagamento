@@ -71,7 +71,6 @@ public class Funcionario {
         this.agenciaConta = agenciaConta;
         this.tipoConta = tipoConta;
         this.codigoBanco = codigoBanco;
-        this.cargo = cargo;
     }
 
     public Long getId() {
