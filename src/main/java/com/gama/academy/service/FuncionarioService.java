@@ -44,4 +44,8 @@ public class FuncionarioService {
     public List<FuncionarioDTO> listar(){
         return FuncionarioMapper.toListFuncionarioDTO(repository.findAll());
     }
+
+    public FuncionarioDTO buscarPorId(Long id){
+        return FuncionarioMapper.toFuncionarioDTO(repository.findById(id).orElseThrow(()-> new EntidadeNaoEncontradaException("Funcionário não encontrado")));
+    }
 }

@@ -2,12 +2,14 @@ package com.gama.academy.model;
 
 import com.gama.academy.enums.EnumAliquotaInss;
 import com.gama.academy.enums.EnumFaixaInss;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class Inss {
 
     private BigDecimal diferenca;
