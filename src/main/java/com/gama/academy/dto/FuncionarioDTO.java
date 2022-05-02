@@ -1,61 +1,62 @@
-package com.gama.academy.model;
+package com.gama.academy.dto;
 
 import com.gama.academy.enums.TipoConta;
 import com.gama.academy.enums.UnidadeSalarial;
+import com.gama.academy.model.Cargo;
 
-import javax.persistence.*;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Entity
-public class Funcionario {
+public class FuncionarioDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+
+    @NotBlank(message = "É necessário informar o nome")
     private String nome;
-    @NotNull
+    @NotNull(message = "É necessário informar a data de nascimento")
     private LocalDate dataNascimento;
-    @NotBlank
+    @NotBlank(message = "É necessário informar o cpf")
     private String cpf;
-    @NotBlank
+    @NotBlank(message = "É necessário informar a matrícula")
     private String matricula;
-    @NotBlank
+    @NotBlank(message = "É necessário informar o telefone")
     private String telefone;
-    @NotBlank
+    @NotBlank(message = "É necessário informar o e-mail")
     private String email;
-    @NotNull
+    @NotNull(message = "É necessário informar a data de admissão")
     private LocalDate dataAdmissao;
     private LocalDate dataDesligamento;
-    @NotNull
+    @NotNull(message = "É necessário informar o status")
     private boolean ativo = true;
 
-    @ManyToOne
-    private Cargo cargo;
-    @NotNull
+    @NotNull(message = "É necessário informar o cargo do funcionario")
+    private Long idCargo;
+    private String cboCargo;
+    private String nomeCargo;
+    private BigDecimal pisoSalarial;
+    private BigDecimal tetoSalarial;
+    @NotNull (message = "É necessário informar a unidade salarial")
     @Enumerated(EnumType.STRING)
     private UnidadeSalarial unidadeSalarial = UnidadeSalarial.MENSAL;
-    @NotNull
+    @NotNull(message = "É necessário informar o salário atual")
     private BigDecimal salarioAtual = BigDecimal.ZERO;
 
-    @NotBlank
+    @NotBlank(message = "É necessário informar o número da conta")
     private String numeroConta;
-    @NotBlank
+    @NotBlank(message = "É necessário informar a agência da conta")
     private String agenciaConta;
-    @NotNull
+    @NotNull (message = "É necessário informar o tipo da conta")
     @Enumerated(EnumType.STRING)
     private TipoConta tipoConta;
-    @NotBlank
+    @NotBlank(message = "É necessário informar o código do banco")
     private String codigoBanco;
 
-    public Funcionario() {
-    }
-
-    public Funcionario(Long id, String nome, LocalDate dataNascimento, String cpf, String matricula, String telefone, String email, LocalDate dataAdmissao,
-        boolean ativo, UnidadeSalarial unidadeSalarial, BigDecimal salarioAtual, String numeroConta, String agenciaConta, TipoConta tipoConta, String codigoBanco) {
+    public FuncionarioDTO(Long id, String nome, LocalDate dataNascimento, String cpf, String matricula, String telefone, String email, LocalDate dataAdmissao,
+        boolean ativo, UnidadeSalarial unidadeSalarial, BigDecimal salarioAtual, String numeroConta, String agenciaConta, TipoConta tipoConta, String codigoBanco, Cargo cargo) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -71,7 +72,13 @@ public class Funcionario {
         this.agenciaConta = agenciaConta;
         this.tipoConta = tipoConta;
         this.codigoBanco = codigoBanco;
-        this.cargo = cargo;
+        if(cargo != null) {
+            this.idCargo = cargo.getId();
+            this.cboCargo = cargo.getCbo();
+            this.nomeCargo = cargo.getDescricao();
+            this.pisoSalarial = cargo.getPisoSalarial();
+            this.tetoSalarial = cargo.getTetoSalarial();
+        }
     }
 
     public Long getId() {
@@ -154,11 +161,11 @@ public class Funcionario {
         this.ativo = ativo;
     }
 
-    public UnidadeSalarial getUnidadesSalarial() {
+    public UnidadeSalarial getUnidadeSalarial() {
         return unidadeSalarial;
     }
 
-    public void setUnidadesSalarial(UnidadeSalarial unidadeSalarial) {
+    public void setUnidadeSalarial(UnidadeSalarial unidadeSalarial) {
         this.unidadeSalarial = unidadeSalarial;
     }
 
@@ -202,11 +209,43 @@ public class Funcionario {
         this.codigoBanco = codigoBanco;
     }
 
-    public Cargo getCargo() {
-        return cargo;
+    public Long getIdCargo() {
+        return idCargo;
     }
 
-    public void setCargo(Cargo cargo) {
-        this.cargo = cargo;
+    public void setIdCargo(Long idCargo) {
+        this.idCargo = idCargo;
+    }
+
+    public String getCboCargo() {
+        return cboCargo;
+    }
+
+    public void setCboCargo(String cboCargo) {
+        this.cboCargo = cboCargo;
+    }
+
+    public String getNomeCargo() {
+        return nomeCargo;
+    }
+
+    public void setNomeCargo(String nomeCargo) {
+        this.nomeCargo = nomeCargo;
+    }
+
+    public BigDecimal getPisoSalarial() {
+        return pisoSalarial;
+    }
+
+    public void setPisoSalarial(BigDecimal pisoSalarial) {
+        this.pisoSalarial = pisoSalarial;
+    }
+
+    public BigDecimal getTetoSalarial() {
+        return tetoSalarial;
+    }
+
+    public void setTetoSalarial(BigDecimal tetoSalarial) {
+        this.tetoSalarial = tetoSalarial;
     }
 }

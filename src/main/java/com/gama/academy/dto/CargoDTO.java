@@ -2,6 +2,7 @@ package com.gama.academy.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 public class CargoDTO {
 
@@ -14,12 +15,12 @@ public class CargoDTO {
     private String descricao;
 
     @NotNull(message = "Piso salarial")
-    private double pisoSalarial;
+    private BigDecimal pisoSalarial;
 
     @NotNull(message = "Teto salarial")
-    private double tetoSalarial;
+    private BigDecimal tetoSalarial;
 
-    public CargoDTO(Long id, String cbo, String descricao, double pisoSalarial, double tetoSalarial) {
+    public CargoDTO(Long id, String cbo, String descricao, BigDecimal pisoSalarial, BigDecimal tetoSalarial) {
         this.id = id;
         this.cbo = cbo;
         this.descricao = descricao;
@@ -49,19 +50,19 @@ public class CargoDTO {
         this.descricao = descricao;
     }
 
-    public double getPisoSalarial() {
+    public BigDecimal getPisoSalarial() {
         return pisoSalarial;
     }
 
-    public void setPisoSalarial(double pisoSalarial) {
+    public void setPisoSalarial(BigDecimal pisoSalarial) {
         this.pisoSalarial = pisoSalarial;
     }
 
-    public double getTetoSalarial() {
+    public BigDecimal getTetoSalarial() {
         return tetoSalarial;
     }
 
-    public void setTetoSalarial(double tetoSalarial) {
+    public void setTetoSalarial(BigDecimal tetoSalarial) {
         this.tetoSalarial = tetoSalarial;
     }
 }
