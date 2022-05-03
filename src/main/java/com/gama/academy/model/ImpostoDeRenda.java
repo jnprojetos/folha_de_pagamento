@@ -3,10 +3,12 @@ package com.gama.academy.model;
 import com.gama.academy.enums.EnumAliquotaIR;
 import com.gama.academy.enums.EnumDeducaoImpostoRenda;
 import com.gama.academy.enums.EnumFaixaImpostoRenda;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+@Component
 public class ImpostoDeRenda {
 
     private BigDecimal totalImpostoRenda;

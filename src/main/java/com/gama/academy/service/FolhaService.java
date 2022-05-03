@@ -30,10 +30,11 @@ public class FolhaService {
     @Autowired
     private Inss inss;
 
-    //private Inss inss = new Inss();
-    private Fgts fgts = new Fgts();
-    private ImpostoDeRenda ir = new ImpostoDeRenda();
+    @Autowired
+    private Fgts fgts;
 
+    @Autowired
+    private ImpostoDeRenda ir;
 
 
     public void folhaGeral(String competencia) {
@@ -61,7 +62,7 @@ public class FolhaService {
     private Folha gerarFolha(Funcionario funcionario, String competencia) {
         Folha folha = new Folha();
         folha.setCompetencia(competencia);
-        folha.setFuncionario(funcionario)   ;
+        folha.setFuncionario(funcionario);
         folha.setBaseFgts(funcionario.getSalarioAtual());
         folha.setBaseInss(funcionario.getSalarioAtual());
         folha.setBaseIrrf(funcionario.getSalarioAtual().subtract(inss.calcularInss(funcionario.getSalarioAtual())));
@@ -82,11 +83,9 @@ public class FolhaService {
         return folhaRepository.findByCompetenciaAndFuncionario(competencia, funcionario).get();
     }
 
-    public void excluirFolhaPorFuncionario(String competencia, Long id){
-        Folha folha = buscarPorCompetenciaFuncionario(competencia, id);
-       if(folha == null){
-           throw new EntidadeNaoEncontradaException("Folha não encontrada para esse funcionário");
-       }
-       folhaRepository.delete(folha);
+    public void excluirFolhaPorCompetencia(String competencia, Pageable pageable){
+        Page<Folha> folhas = folhaRepository.findByCompetencia(competencia, pageable);
+
+       folhaRepository.deleteAll(folhas);
     }
 }

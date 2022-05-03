@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/folhas")
+@RequestMapping("/v1/fechamentos")
 @Api(tags = "Folha")
 public class FolhaController {
 
@@ -22,13 +22,13 @@ public class FolhaController {
     FolhaService folhaService;
 
     @ApiOperation(value = "Gerar folha de pagamento por funcionário")
-    @PostMapping("/{id}/{competencia}")
+    @PostMapping("funcionario/{id}/competencia/{competencia}")
     public ResponseEntity<FolhaDTO> gerarFolhaPorFuncionario(@PathVariable Long id, @PathVariable String competencia){
         return ResponseEntity.status(HttpStatus.CREATED).body(folhaService.folhaPorFuncionario(id, competencia));
     }
 
     @ApiOperation(value = "Gerar folha de pagamento geral")
-    @PostMapping("/geral/{competencia}")
+    @PostMapping("/competencia/{competencia}")
     public ResponseEntity<Folha> gerarFolhaGeral(@PathVariable String competencia){
         folhaService.folhaGeral(competencia);
        return ResponseEntity.ok().build();
@@ -41,15 +41,15 @@ public class FolhaController {
     }
 
     @ApiOperation(value = "Consultar folha de pagamento por funcionário e competência")
-    @GetMapping("/competencia/{competencia}/{id}")
+    @GetMapping("/funcionario/{id}/competencia/{competencia}")
     public ResponseEntity<Folha> buscarPorCompetenciaFuncionario(@PathVariable String competencia, @PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(folhaService.buscarPorCompetenciaFuncionario(competencia, id));
     }
 
     @ApiOperation(value = "Excluir folha de pagamento por competência")
-    @DeleteMapping("/{competencia}/{id}")
-    public ResponseEntity<Folha> excluirFolhaPorFuncionario(@PathVariable String competencia, @PathVariable Long id){
-        folhaService.excluirFolhaPorFuncionario(competencia, id);
+    @DeleteMapping("competencia/{competencia}")
+    public ResponseEntity<Folha> excluirFolhaPorCompetencia(@PathVariable String competencia, Pageable pageable){
+        folhaService.excluirFolhaPorCompetencia(competencia, pageable);
         return ResponseEntity.ok().build();
     }
 }

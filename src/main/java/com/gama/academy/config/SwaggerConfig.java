@@ -1,6 +1,6 @@
 package com.gama.academy.config;
 
-import com.gft.model.Usuario;
+import com.gama.academy.model.Usuario;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;
@@ -28,18 +28,18 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.gft"))
                 .paths(PathSelectors.ant("/**"))
-                .build();
-               //.ignoredParameterTypes(Usuario.class);
+                .build()
+               .ignoredParameterTypes(Usuario.class);
 
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfo(
-                "Desafio API - Programa Starters Java",
-                "Projeto prático do programa de formação Starters GFT.",
+                "API Gestão de Folha de Pagamento - PaymentsRegister",
+                "Desafio Final Bootcampo Gama Academy e CERC.",
                 "1.0",
                 "Terms of service",
-                new Contact("Josimar Nepomuceno", "", "josimar.n2007@gmail.com"),
+                new Contact("Equipe 4", "", "equipe4@@gmail.com"),
                 "License of API",
                 "API license URL",
                 Collections.emptyList());

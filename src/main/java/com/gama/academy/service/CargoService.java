@@ -6,6 +6,8 @@ import com.gama.academy.mapper.CargoMapper;
 import com.gama.academy.model.Cargo;
 import com.gama.academy.repository.CargoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,9 +20,9 @@ public class CargoService {
     @Autowired
     private CargoRepository cargoRepository;
 
-    public List<CargoDTO> listarTodos(){
-        return cargoRepository.findAll()
-                .stream().map(CargoMapper::toCargoDTO).collect(Collectors.toList());
+    public Page<CargoDTO> listarTodos(Pageable pageable){
+        return cargoRepository.findAll(pageable)
+                .map(CargoMapper::toCargoDTO);
     }
 
     public CargoDTO novoCargo(CargoDTO cargoDTO){

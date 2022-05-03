@@ -20,12 +20,12 @@ public class FuncionarioController {
     @Autowired
     private FuncionarioService service;
 
-    @GetMapping
+    @GetMapping(produces = "application/json")
     public ResponseEntity<List<FuncionarioDTO>> listar(){
         return ResponseEntity.ok(service.listar());
     }
 
-    @PostMapping
+    @PostMapping(produces = "application/json")
     public ResponseEntity<FuncionarioDTO> salvar(@Valid @RequestBody FuncionarioDTO dto){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.salvar(dto));
     }

@@ -5,6 +5,8 @@ import com.gama.academy.mapper.DependenteMapper;
 import com.gama.academy.model.Dependente;
 import com.gama.academy.repository.DependenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +18,9 @@ public class DependenteService {
     @Autowired
     private DependenteRepository dependenteRepository;
 
-    public List<DependenteDTO> listarTodos(){
-        return dependenteRepository.findAll()
-                .stream().map(dependente -> DependenteMapper.toDependenteDTO(dependente)).collect(Collectors.toList());
+    public Page<DependenteDTO> listarTodos(Pageable pageable){
+        return dependenteRepository.findAll(pageable)
+                .map(dependente -> DependenteMapper.toDependenteDTO(dependente));
     }
 
     public DependenteDTO novoDependente(DependenteDTO dependenteDTO){
@@ -30,5 +32,10 @@ public class DependenteService {
         Dependente dependente = dependenteRepository.findById(id).orElseThrow(()-> new RuntimeException("Dependente não encontrado"));
         dependenteDTO.setId(dependente.getId());
         return DependenteMapper.toDependenteDTO(dependenteRepository.save(DependenteMapper.toDependente(dependenteDTO)));
+    }
+
+    public void excluir(Long id){
+        Dependente dependente = dependenteRepository.findById(id).orElseThrow(()-> new RuntimeException("Dependente não encontrado"));
+        dependenteRepository.delete(dependente);
     }
 }
