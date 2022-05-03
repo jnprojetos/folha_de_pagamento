@@ -7,7 +7,7 @@ import com.gama.academy.model.Cargo;
 public class CargoMapper {
 
     public static Cargo toCargo(CargoDTO cargoDTO){
-        return new Cargo(CargoDTO.getId(), cargoDTO.getCbo(), cargoDTO.getDescricao(), cargoDTO.getPisoSalarial(), cargoDTO.getTetoSalarial());
+        return new Cargo(cargoDTO.getId(), cargoDTO.getCbo(), cargoDTO.getDescricao(), cargoDTO.getPisoSalarial(), cargoDTO.getTetoSalarial());
     }
 
     public static CargoDTO toCargoDTO(Cargo cargo){

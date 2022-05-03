@@ -1,9 +1,6 @@
 package com.gama.academy.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
@@ -13,18 +10,18 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @Column(nullable = false)
     String logradouro;
-    @NotBlank
+    @Column(nullable = false)
     String numero;
     String complemento;
-    @NotBlank
+    @Column(nullable = false)
     String bairro;
-    @NotBlank
+    @Column(nullable = false)
     String cidade;
-    @NotBlank
+    @Column(nullable = false)
     String uf;
-    @NotBlank
+    @Column(nullable = false)
     String pais;
 
     public Endereco(){}

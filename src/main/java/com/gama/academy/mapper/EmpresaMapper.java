@@ -10,9 +10,9 @@ public class EmpresaMapper {
                 empresaDTO.getEmail(), empresaDTO.getTelefone(), EnderecoMapper.toEndereco(empresaDTO.getEndereco()));
     }
 
-    public static Empresa toEmpresaDTO(Empresa empresa){
-        return new Empresa(empresa.getId(), empresa.getNomeFantasia(), empresa.getRazaoSocial(), empresa.getCnpj(),
-                empresa.getEmail(), empresa.getTelefone(), empresa.getEndereco());
+    public static EmpresaDTO toEmpresaDTO(Empresa empresa){
+        return new EmpresaDTO(empresa.getId(), empresa.getNomeFantasia(), empresa.getRazaoSocial(), empresa.getCnpj(),
+                empresa.getEmail(), empresa.getTelefone(), EnderecoMapper.toEnderecoDTO(empresa.getEndereco()));
     }
 
 }

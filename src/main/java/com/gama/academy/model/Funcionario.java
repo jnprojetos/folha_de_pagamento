@@ -2,6 +2,7 @@ package com.gama.academy.model;
 
 import com.gama.academy.enums.TipoConta;
 import com.gama.academy.enums.UnidadeSalarial;
+import com.gama.academy.mapper.EnderecoMapper;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -31,7 +32,7 @@ public class Funcionario {
     private LocalDate dataAdmissao;
     private LocalDate dataDesligamento;
     @NotNull
-    private boolean ativo = true;
+    private boolean ativo;
 
     @ManyToOne
     private Cargo cargo;
@@ -51,11 +52,18 @@ public class Funcionario {
     @NotBlank
     private String codigoBanco;
 
+    @NotNull
+    @OneToOne
+    private Endereco endereco;
+
+    @NotNull
+    @ManyToOne
+    private Empresa empresa;
+
     public Funcionario() {
     }
 
-    public Funcionario(Long id, String nome, LocalDate dataNascimento, String cpf, String matricula, String telefone, String email, LocalDate dataAdmissao,
-        boolean ativo, UnidadeSalarial unidadeSalarial, BigDecimal salarioAtual, String numeroConta, String agenciaConta, TipoConta tipoConta, String codigoBanco) {
+    public Funcionario(Long id, String nome, LocalDate dataNascimento, String cpf, String matricula, String telefone, String email, LocalDate dataAdmissao, UnidadeSalarial unidadeSalarial, BigDecimal salarioAtual, String numeroConta, String agenciaConta, TipoConta tipoConta, String codigoBanco, Cargo cargo, Empresa empresa, Endereco endereco) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -64,13 +72,15 @@ public class Funcionario {
         this.telefone = telefone;
         this.email = email;
         this.dataAdmissao = dataAdmissao;
-        this.ativo = ativo;
         this.unidadeSalarial = unidadeSalarial;
         this.salarioAtual = salarioAtual;
         this.numeroConta = numeroConta;
         this.agenciaConta = agenciaConta;
         this.tipoConta = tipoConta;
         this.codigoBanco = codigoBanco;
+        this.cargo = cargo;
+        this.empresa = empresa;
+        this.endereco = endereco;
     }
 
     public Long getId() {
@@ -207,5 +217,21 @@ public class Funcionario {
 
     public void setCargo(Cargo cargo) {
         this.cargo = cargo;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }
