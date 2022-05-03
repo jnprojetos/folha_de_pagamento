@@ -2,4 +2,4 @@
 
 # Bem-vindo ao nosso repositório!
 
-#### Esse projeto é o desafio final de programação do bootcamp da CERC ministrado pela professora Marianne Salomão, da Gama Academy.
+#### Esse projeto é o desafio final de programação do bootcamp da CERC ministrado pela professora <a href="https://www.linkedin.com/in/mariannesalomao/">Marianne Salomão</a>, da Gama Academy.
