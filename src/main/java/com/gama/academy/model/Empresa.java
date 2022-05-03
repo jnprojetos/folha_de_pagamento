@@ -6,9 +6,6 @@ import java.util.Objects;
 @Entity
 public class Empresa {
 
-    @OneToOne
-    @JoinColumn(name = "get_endereco_id")
-    public Endereco getEndereco;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

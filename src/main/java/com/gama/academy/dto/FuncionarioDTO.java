@@ -2,7 +2,6 @@ package com.gama.academy.dto;
 
 import com.gama.academy.enums.TipoConta;
 import com.gama.academy.enums.UnidadeSalarial;
-import com.gama.academy.model.Cargo;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -34,11 +33,7 @@ public class FuncionarioDTO {
     private boolean ativo = true;
 
     @NotNull(message = "É necessário informar o cargo do funcionario")
-    private Long idCargo;
-    private String cboCargo;
-    private String nomeCargo;
-    private BigDecimal pisoSalarial;
-    private BigDecimal tetoSalarial;
+    private CargoDTO cargo;
     @NotNull (message = "É necessário informar a unidade salarial")
     @Enumerated(EnumType.STRING)
     private UnidadeSalarial unidadeSalarial = UnidadeSalarial.MENSAL;
@@ -54,9 +49,13 @@ public class FuncionarioDTO {
     private TipoConta tipoConta;
     @NotBlank(message = "É necessário informar o código do banco")
     private String codigoBanco;
+    @NotNull(message = "É necessário informar a empresa do funcionário")
+    private EmpresaDTO empresa;
+    @NotNull(message = "É necessário informar o endereço do funcionário")
+    private EnderecoDTO endereco;
 
     public FuncionarioDTO(Long id, String nome, LocalDate dataNascimento, String cpf, String matricula, String telefone, String email, LocalDate dataAdmissao,
-        boolean ativo, UnidadeSalarial unidadeSalarial, BigDecimal salarioAtual, String numeroConta, String agenciaConta, TipoConta tipoConta, String codigoBanco, Cargo cargo) {
+                          boolean ativo, UnidadeSalarial unidadeSalarial, BigDecimal salarioAtual, String numeroConta, String agenciaConta, TipoConta tipoConta, String codigoBanco, CargoDTO cargo, EmpresaDTO empresa,  EnderecoDTO endereco) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -72,13 +71,9 @@ public class FuncionarioDTO {
         this.agenciaConta = agenciaConta;
         this.tipoConta = tipoConta;
         this.codigoBanco = codigoBanco;
-        if(cargo != null) {
-            this.idCargo = cargo.getId();
-            this.cboCargo = cargo.getCbo();
-            this.nomeCargo = cargo.getDescricao();
-            this.pisoSalarial = cargo.getPisoSalarial();
-            this.tetoSalarial = cargo.getTetoSalarial();
-        }
+        this.cargo = cargo;
+        this.empresa = empresa;
+        this.endereco = endereco;
     }
 
     public Long getId() {
@@ -209,43 +204,27 @@ public class FuncionarioDTO {
         this.codigoBanco = codigoBanco;
     }
 
-    public Long getIdCargo() {
-        return idCargo;
+    public CargoDTO getCargo() {
+        return cargo;
     }
 
-    public void setIdCargo(Long idCargo) {
-        this.idCargo = idCargo;
+    public void setCargo(CargoDTO cargo) {
+        this.cargo = cargo;
     }
 
-    public String getCboCargo() {
-        return cboCargo;
+    public EmpresaDTO getEmpresa() {
+        return empresa;
     }
 
-    public void setCboCargo(String cboCargo) {
-        this.cboCargo = cboCargo;
+    public void setEmpresa(EmpresaDTO empresa) {
+        this.empresa = empresa;
     }
 
-    public String getNomeCargo() {
-        return nomeCargo;
+    public EnderecoDTO getEndereco() {
+        return endereco;
     }
 
-    public void setNomeCargo(String nomeCargo) {
-        this.nomeCargo = nomeCargo;
-    }
-
-    public BigDecimal getPisoSalarial() {
-        return pisoSalarial;
-    }
-
-    public void setPisoSalarial(BigDecimal pisoSalarial) {
-        this.pisoSalarial = pisoSalarial;
-    }
-
-    public BigDecimal getTetoSalarial() {
-        return tetoSalarial;
-    }
-
-    public void setTetoSalarial(BigDecimal tetoSalarial) {
-        this.tetoSalarial = tetoSalarial;
+    public void setEndereco(EnderecoDTO endereco) {
+        this.endereco = endereco;
     }
 }

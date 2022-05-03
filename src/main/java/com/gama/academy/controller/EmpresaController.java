@@ -2,7 +2,6 @@ package com.gama.academy.controller;
 
 
 import com.gama.academy.dto.EmpresaDTO;
-import com.gama.academy.model.Empresa;
 import com.gama.academy.service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,17 +18,17 @@ public class EmpresaController {
     private EmpresaService empresaService;
 
     @GetMapping
-    public ResponseEntity<List<Empresa>> listar(){
+    public ResponseEntity<List<EmpresaDTO>> listar(){
       return ResponseEntity.ok(empresaService.listarTodos());
     }
 
     @PostMapping
-    public ResponseEntity<Empresa> adicionar(@Valid @RequestBody EmpresaDTO empresaDTO){
+    public ResponseEntity<EmpresaDTO> adicionar(@Valid @RequestBody EmpresaDTO empresaDTO){
         return ResponseEntity.status(HttpStatus.CREATED).body(empresaService.novaEmpresa(empresaDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Empresa> alterar(@Valid @PathVariable Long id, @RequestBody EmpresaDTO empresaDTO){
+    public ResponseEntity<EmpresaDTO> alterar(@Valid @PathVariable Long id, @RequestBody EmpresaDTO empresaDTO){
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(empresaService.alterarEmpresa(id, empresaDTO));
     }
 }
