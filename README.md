@@ -56,7 +56,7 @@ API que faz o gerenciamento da folha de pagamentos e que permite as seguintes op
 7. Configure o arquivo application.properties escolhendo a Porta, banco de dados, usuário e senha.
 8. Execute a aplicação utilizando o Intellij IDE.
 9. Instalar o Postman ou alguma plataforma de API da sua escolha.
-10. Execute a plataforma de API e insira os EndPoints presentes no arquivo REQUEST.JSON do projeto.
+10. Execute a plataforma de API e insira os EndPoints presentes no arquivo .JSON do projeto.
 11. Execute as requisições.
 
 
