@@ -40,10 +40,7 @@ public class EnderecoService {
     }
 
     public Endereco findById(Long id){
-        Optional<Endereco> endereco = repository.findById(id);
-        if(endereco.isPresent()){
-            return endereco.get();
-        }
-        return null;
+        Endereco endereco = repository.findById(id).orElseThrow(()-> new EntidadeNaoEncontradaException("Endereço nao encontrado"));
+        return endereco;
     }
 }

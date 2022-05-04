@@ -51,7 +51,6 @@ public class Funcionario {
     private TipoConta tipoConta;
     @NotBlank
     private String codigoBanco;
-
     @NotNull
     @OneToOne
     private Endereco endereco;

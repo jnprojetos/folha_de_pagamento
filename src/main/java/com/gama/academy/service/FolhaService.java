@@ -2,6 +2,7 @@ package com.gama.academy.service;
 
 import com.gama.academy.dto.FolhaDTO;
 import com.gama.academy.dto.FuncionarioDTO;
+import com.gama.academy.enums.EnumDeducaoDependente;
 import com.gama.academy.exception.EntidadeNaoEncontradaException;
 import com.gama.academy.exception.RegraNegocioException;
 import com.gama.academy.mapper.FolhaDTOMapper;
@@ -28,29 +29,32 @@ public class FolhaService {
     private FuncionarioService funcionarioService;
 
     @Autowired
+    private DependenteService dependenteService;
+
+    @Autowired
     private Inss inss;
 
-    //private Inss inss = new Inss();
-    private Fgts fgts = new Fgts();
-    private ImpostoDeRenda ir = new ImpostoDeRenda();
+    @Autowired
+    private Fgts fgts;
 
+    @Autowired
+    private ImpostoDeRenda ir;
 
 
     public void folhaGeral(String competencia) {
         if (folhaRepository.existsByCompetencia(competencia)) {
             throw new RegraNegocioException("Já existe uma folha de pagamento nessa competência");
         }
-        List<FuncionarioDTO> funcionarios = funcionarioService.listar();
-        for (int i = 0; i < funcionarios.size(); i++) {
-            gerarFolha(FuncionarioMapper.toFuncionario(funcionarios.get(i)), competencia);
-        }
+        List<Funcionario> funcionarios = funcionarioService.listarAtivos();
+
+        funcionarios.forEach(funcionario -> gerarFolha(funcionario , competencia));
     }
 
     public FolhaDTO folhaPorFuncionario(Long id, String competencia) {
         if (folhaRepository.existsByCompetencia(competencia)) {
             throw new RegraNegocioException("Já existe uma folha de pagamento nessa competência");
         }
-        Funcionario funcionario = FuncionarioMapper.toFuncionario(funcionarioService.buscarPorId(id));
+        Funcionario funcionario = funcionarioService.buscarPorIdEAtivo(id);
         return FolhaDTOMapper.toFolhaDTO(gerarFolha(funcionario, competencia));
     }
 
@@ -59,17 +63,24 @@ public class FolhaService {
     }
 
     private Folha gerarFolha(Funcionario funcionario, String competencia) {
+        BigDecimal valorDeducaoDependente = BigDecimal.ZERO;
+        valorDeducaoDependente = calcularDeducacaoImpostoRenda(funcionario);
+        BigDecimal valorInss = BigDecimal.ZERO;
+        valorInss = valorInss.add(inss.calcularInss(funcionario.getSalarioAtual()));
+        BigDecimal valoIrrf = BigDecimal.ZERO;
+        valoIrrf = ir.calcularImpostoRenda(funcionario.getSalarioAtual().subtract(valorInss).subtract(valorDeducaoDependente));
+
         Folha folha = new Folha();
         folha.setCompetencia(competencia);
-        folha.setFuncionario(funcionario)   ;
+        folha.setFuncionario(funcionario);
         folha.setBaseFgts(funcionario.getSalarioAtual());
         folha.setBaseInss(funcionario.getSalarioAtual());
-        folha.setBaseIrrf(funcionario.getSalarioAtual().subtract(inss.calcularInss(funcionario.getSalarioAtual())));
+        folha.setBaseIrrf(funcionario.getSalarioAtual().subtract(valorInss).subtract(valorDeducaoDependente));
         folha.setFgts(fgts.calcularFgts(funcionario.getSalarioAtual()));
-        folha.setInss(inss.calcularInss(funcionario.getSalarioAtual()));
-        folha.setIrrf(ir.calcularImpostoRenda(funcionario.getSalarioAtual().subtract(inss.calcularInss(funcionario.getSalarioAtual()))));
-        folha.setTotalDesconto(calcularTotalDescontos(funcionario.getSalarioAtual()));
-        folha.setSalarioLiquido(funcionario.getSalarioAtual().subtract(calcularTotalDescontos(funcionario.getSalarioAtual())));
+        folha.setInss(valorInss);
+        folha.setIrrf(valoIrrf);
+        folha.setTotalDesconto(valorInss.add(valoIrrf));
+        folha.setSalarioLiquido(funcionario.getSalarioAtual().subtract(valoIrrf.add(valorInss)));
         return folhaRepository.save(folha);
     }
 
@@ -77,16 +88,28 @@ public class FolhaService {
         return inss.calcularInss(salario).add(ir.calcularImpostoRenda(salario));
     }
 
+    private BigDecimal calcularDeducacaoImpostoRenda(Funcionario funcionario){
+        int numeroDependentes = 0;
+        BigDecimal totalDeducaoDependente = BigDecimal.ZERO;
+        List<Dependente> dependentes = dependenteService.listarPorFuncionario(funcionario);
+        for(int i = 0; i < dependentes.size(); i++){
+            if(dependentes.get(i).calculaIdade(dependentes.get(i).getDataNascimento()) <= 21){
+                numeroDependentes += 1;
+            }
+        }
+        if (numeroDependentes > 0){
+            totalDeducaoDependente = EnumDeducaoDependente.DEDUCAO_POR_DEPENDENTE.getValor().multiply(BigDecimal.valueOf(numeroDependentes));
+        }
+        return totalDeducaoDependente;
+    }
+
     public Folha buscarPorCompetenciaFuncionario(String competencia, Long id){
         Funcionario funcionario = FuncionarioMapper.toFuncionario(funcionarioService.buscarPorId(id));
         return folhaRepository.findByCompetenciaAndFuncionario(competencia, funcionario).get();
     }
 
-    public void excluirFolhaPorFuncionario(String competencia, Long id){
-        Folha folha = buscarPorCompetenciaFuncionario(competencia, id);
-       if(folha == null){
-           throw new EntidadeNaoEncontradaException("Folha não encontrada para esse funcionário");
-       }
-       folhaRepository.delete(folha);
+    public void excluirFolhaPorCompetencia(String competencia, Pageable pageable){
+        Page<Folha> folhas = folhaRepository.findByCompetencia(competencia, pageable);
+       folhaRepository.deleteAll(folhas);
     }
 }
