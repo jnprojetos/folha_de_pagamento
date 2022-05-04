@@ -1,13 +1,11 @@
 package com.gama.academy.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.Period;
 import java.util.Objects;
 
 @Entity
@@ -19,46 +17,45 @@ public class Dependente {
     private String nome;
     private String cpf;
     private LocalDate dataNascimento;
+    private Funcionario funcinario;
 
     public Dependente(){};
 
-    public Dependente(Long id, String nome, String cpf, LocalDate dataNascimento) {
+    public Dependente(Long id, String nome, String cpf, LocalDate dataNascimento, Funcionario funcionario) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
+        this.funcinario = funcionario;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
     public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public Funcionario getFuncinario() {
+        return funcinario;
+    }
+
+    public void setFuncinario(Funcionario funcinario) {
+        this.funcinario = funcinario;
+    }
+
+    public int calculaIdade(LocalDate dataNascimento){
+        Period idade = Period.between(LocalDate.now(), dataNascimento);
+        return idade.getYears();
     }
 
     @Override

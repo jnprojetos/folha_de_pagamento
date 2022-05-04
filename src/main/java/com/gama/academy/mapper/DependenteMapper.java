@@ -6,10 +6,12 @@ import com.gama.academy.model.Dependente;
 public class DependenteMapper {
 
     public static Dependente toDependente(DependenteDTO dependenteDTO){
-        return new Dependente(dependenteDTO.getId(), dependenteDTO.getNome(), dependenteDTO.getCpf(), dependenteDTO.getDataNascimento());
+        return new Dependente(dependenteDTO.getId(), dependenteDTO.getNome(), dependenteDTO.getCpf(),
+                dependenteDTO.getDataNascimento(), FuncionarioMapper.toFuncionario(dependenteDTO.getFuncionario()));
     }
 
     public static DependenteDTO toDependenteDTO(Dependente dependente){
-        return new DependenteDTO(dependente.getId(), dependente.getNome(), dependente.getCpf(), dependente.getDataNascimento());
+        return new DependenteDTO(dependente.getId(), dependente.getNome(), dependente.getCpf(),
+                dependente.getDataNascimento(),FuncionarioMapper.toFuncionarioDTO(dependente.getFuncinario()));
     }
 }

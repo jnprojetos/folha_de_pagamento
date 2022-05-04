@@ -23,7 +23,7 @@ public class UsuarioService implements UserDetailsService {
 
     @Transactional
     public Usuario novoUsuario(Usuario usuario){
-        Perfil perfil = perfilService.buscaPorNome(usuario.getPerfil().getNome());
+        Perfil perfil = perfilService.buscaPorId(usuario.getPerfil().getId());
         boolean emailEmUso = usuarioRepository.findByEmail(usuario.getEmail())
                 .stream().anyMatch(usuarioExistente -> !usuarioExistente.equals(usuario));
         if (emailEmUso){

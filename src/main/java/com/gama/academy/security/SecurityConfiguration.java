@@ -42,12 +42,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
+               // .antMatchers("/").permitAll();
             .antMatchers(HttpMethod.POST, "/auth").permitAll()
+            .antMatchers("/usuarios/**").permitAll()
             .antMatchers("/swagger/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/categorias").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/categorias/**").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.GET, "/starters").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/starters/**").hasAuthority("ADMIN")
+                //.antMatchers(HttpMethod.GET, "/categorias").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/cargos/**").permitAll()
+                .antMatchers("/dependentes/**").permitAll()
+                .antMatchers("/empresas/**").permitAll()
+                .antMatchers("/funcionarios/**").permitAll()
+               .antMatchers("/fechamentos/**").permitAll()
+               .antMatchers("/enderecos/**").permitAll()
             .anyRequest().authenticated()
             .and().csrf().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

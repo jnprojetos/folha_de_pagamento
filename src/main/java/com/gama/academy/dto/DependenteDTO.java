@@ -21,11 +21,14 @@ public class DependenteDTO {
     @Past(message = "Informa uma data de nascimento válida")
     private LocalDate dataNascimento;
 
-    public DependenteDTO(Long id, String nome, String cpf, LocalDate dataNascimento) {
+    private FuncionarioDTO funcionario;
+
+    public DependenteDTO(Long id, String nome, String cpf, LocalDate dataNascimento, FuncionarioDTO funcionario) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
+        this.funcionario = funcionario;
     }
 
     public Long getId() {
@@ -40,23 +43,19 @@ public class DependenteDTO {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public String getCpf() {
         return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public FuncionarioDTO getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(FuncionarioDTO funcionario) {
+        this.funcionario = funcionario;
     }
 }

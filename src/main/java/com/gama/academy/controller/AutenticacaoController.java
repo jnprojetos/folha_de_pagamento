@@ -29,6 +29,7 @@ public class AutenticacaoController {
 
     @Autowired
     private TokenService tokenService;
+
     @ApiOperation(value = "Gerar token")
     @PostMapping(produces = "application/json")
     public ResponseEntity<TokenDTO> autenticar(@RequestBody @Valid LoginFormDTO form){
