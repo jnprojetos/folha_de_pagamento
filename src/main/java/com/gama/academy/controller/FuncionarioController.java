@@ -14,7 +14,7 @@ import java.time.ZoneId;
 import java.util.List;
 
 @RestController
-@RequestMapping("/funcionarios")
+@RequestMapping("v1/funcionarios")
 public class FuncionarioController {
 
     @Autowired

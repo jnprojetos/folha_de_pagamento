@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("v1/auth")
 @Api(tags = "Autenticação")
 public class AutenticacaoController {
 

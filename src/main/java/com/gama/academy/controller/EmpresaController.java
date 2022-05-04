@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/empresas")
+@RequestMapping("v1/empresas")
 public class EmpresaController {
     @Autowired
     private EmpresaService empresaService;

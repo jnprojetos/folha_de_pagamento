@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/fechamentos")
+@RequestMapping("v1/fechamentos")
 @Api(tags = "Folha")
 public class FolhaController {
 

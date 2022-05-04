@@ -1,9 +1,6 @@
 package com.gama.academy.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Objects;
@@ -17,7 +14,8 @@ public class Dependente {
     private String nome;
     private String cpf;
     private LocalDate dataNascimento;
-    private Funcionario funcinario;
+    @ManyToOne
+    private Funcionario funcionario;
 
     public Dependente(){};
 
@@ -26,7 +24,7 @@ public class Dependente {
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
-        this.funcinario = funcionario;
+        this.funcionario = funcionario;
     }
 
     public Long getId() {
@@ -46,11 +44,11 @@ public class Dependente {
     }
 
     public Funcionario getFuncinario() {
-        return funcinario;
+        return funcionario;
     }
 
     public void setFuncinario(Funcionario funcinario) {
-        this.funcinario = funcinario;
+        this.funcionario = funcionario;
     }
 
     public int calculaIdade(LocalDate dataNascimento){

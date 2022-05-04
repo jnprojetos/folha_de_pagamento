@@ -17,7 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cargos")
+@RequestMapping("v1/cargos")
 @Api(tags = "Cargos")
 public class CargoController {
 
