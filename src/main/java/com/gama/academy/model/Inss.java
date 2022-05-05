@@ -12,28 +12,28 @@ import java.util.List;
 @Component
 public class Inss {
 
-    private BigDecimal diferenca;
-    private List<BigDecimal> totalInss = new ArrayList<>();
-
     public BigDecimal calcularInss(BigDecimal baseDeCalculo){
+
+        BigDecimal diferenca = BigDecimal.ZERO;
+        List<BigDecimal> totalInss = new ArrayList<>();
 
         while(baseDeCalculo.compareTo(BigDecimal.ZERO) > 0) {
             if(baseDeCalculo.compareTo(EnumFaixaInss.FAIXA_04.getValor()) > 0) {
                 baseDeCalculo = EnumFaixaInss.FAIXA_04.getValor();
             }else if(baseDeCalculo.compareTo(EnumFaixaInss.FAIXA_03.getValor()) > 0 && baseDeCalculo.compareTo(EnumFaixaInss.FAIXA_04.getValor()) <= 0){
-                this.diferenca = baseDeCalculo.subtract(EnumFaixaInss.FAIXA_03.getValor());
-                this.totalInss.add(this.diferenca.multiply(EnumAliquotaInss.QUATORZE.getValor()));
-                baseDeCalculo = baseDeCalculo.subtract(this.diferenca).setScale(2, RoundingMode.HALF_EVEN);
+                diferenca = baseDeCalculo.subtract(EnumFaixaInss.FAIXA_03.getValor());
+                totalInss.add(diferenca.multiply(EnumAliquotaInss.QUATORZE.getValor()));
+                baseDeCalculo = baseDeCalculo.subtract(diferenca).setScale(2, RoundingMode.HALF_EVEN);
             }else if(baseDeCalculo.compareTo(EnumFaixaInss.FAIXA_02.getValor()) > 0 && baseDeCalculo.compareTo(EnumFaixaInss.FAIXA_03.getValor()) <= 0){
-                this.diferenca = baseDeCalculo.subtract(EnumFaixaInss.FAIXA_02.getValor());
-                this.totalInss.add(this.diferenca.multiply(EnumAliquotaInss.DOZE.getValor()));
+                diferenca = baseDeCalculo.subtract(EnumFaixaInss.FAIXA_02.getValor());
+                totalInss.add(diferenca.multiply(EnumAliquotaInss.DOZE.getValor()));
                 baseDeCalculo = baseDeCalculo.subtract(diferenca).setScale(2, RoundingMode.HALF_EVEN);;
             }else if(baseDeCalculo.compareTo(EnumFaixaInss.FAIXA_01.getValor()) > 0 && baseDeCalculo.compareTo(EnumFaixaInss.FAIXA_02.getValor()) <= 0) {
-                this.diferenca = baseDeCalculo.subtract(EnumFaixaInss.FAIXA_01.getValor());
-                this.totalInss.add(this.diferenca.multiply(EnumAliquotaInss.NOVE.getValor()));
-                baseDeCalculo = baseDeCalculo.subtract(this.diferenca).setScale(2, RoundingMode.HALF_EVEN);
+                diferenca = baseDeCalculo.subtract(EnumFaixaInss.FAIXA_01.getValor());
+                totalInss.add(diferenca.multiply(EnumAliquotaInss.NOVE.getValor()));
+                baseDeCalculo = baseDeCalculo.subtract(diferenca).setScale(2, RoundingMode.HALF_EVEN);
             }else{
-                this.totalInss.add(baseDeCalculo.multiply(EnumAliquotaInss.SETE_MEIO.getValor()));
+                totalInss.add(baseDeCalculo.multiply(EnumAliquotaInss.SETE_MEIO.getValor()));
                 baseDeCalculo = baseDeCalculo.subtract(baseDeCalculo).setScale(2, RoundingMode.HALF_EVEN);
             }
         }
