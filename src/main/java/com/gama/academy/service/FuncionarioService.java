@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class FuncionarioService {
 
     @Autowired
@@ -36,29 +37,32 @@ public class FuncionarioService {
     @Autowired
     EnderecoService enderecoService;
 
-    @Transactional
     public FuncionarioDTOOutput novoFuncionario(FuncionarioDTO dto) {
         boolean funcionarioAtivo = repository.findByCpfAndAtivo(dto.getCpf(), true)
                 .stream().anyMatch(funcionarioExistente -> !funcionarioExistente.equals(dto));
         if (funcionarioAtivo){
             throw new RegraNegocioException("Já existe um funcionário ativo com esses dados.");
         }
+        preecherDadosFuncionario(dto);
+        Funcionario funcionario = FuncionarioMapper.toFuncionario(dto);
+        funcionario.admitir();
+        return FuncionarioMapper.toFuncionarioOutput(repository.save(funcionario));
+    }
+
+    public FuncionarioDTOOutput alterar(Long id, FuncionarioDTO dto){
+        Funcionario funcionario = repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("Funcionário não encontrado."));
+        preecherDadosFuncionario(dto);
+        dto.setId(funcionario.getId());
+        return FuncionarioMapper.toFuncionarioOutput(repository.save(FuncionarioMapper.toFuncionario(dto)));
+    }
+
+    private void preecherDadosFuncionario(FuncionarioDTO dto){
         Cargo cargo = cargoService.findById(dto.getCargo().getId());
         Empresa empresa = empresaService.findById(dto.getEmpresa().getId());
         Endereco endereco = enderecoService.findById(dto.getEndereco().getId());
         dto.setCargo(CargoMapper.toCargoDTO(cargo));
         dto.setEmpresa(EmpresaMapper.toEmpresaDTO(empresa));
         dto.setEndereco(EnderecoMapper.toEnderecoDTO(endereco));
-        Funcionario funcionario = FuncionarioMapper.toFuncionario(dto);
-        funcionario.admitir();
-        return FuncionarioMapper.toFuncionarioOutput(repository.save(funcionario));
-    }
-
-    @Transactional
-    public FuncionarioDTOOutput alterar(Long id, FuncionarioDTO dto){
-        Funcionario funcionario = repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("Funcionário não encontrado."));
-        dto.setId(funcionario.getId());
-        return FuncionarioMapper.toFuncionarioOutput(repository.save(FuncionarioMapper.toFuncionario(dto)));
     }
 
     public Page<FuncionarioDTOOutput> listar(Pageable pageable){

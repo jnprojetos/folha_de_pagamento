@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class UsuarioService implements UserDetailsService {
 
     @Autowired
@@ -21,7 +22,6 @@ public class UsuarioService implements UserDetailsService {
     @Autowired
     private PerfilService perfilService;
 
-    @Transactional
     public Usuario novoUsuario(Usuario usuario){
         Perfil perfil = perfilService.buscaPorId(usuario.getPerfil().getId());
         boolean emailEmUso = usuarioRepository.findByEmail(usuario.getEmail())

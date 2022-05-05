@@ -2,6 +2,7 @@ package com.gama.academy.dto;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -16,6 +17,7 @@ public class FuncionarioDTO {
     private String nome;
 
     @NotNull(message = "É necessário informar a data de nascimento")
+    @Future(message = "Data de nascimento inválida")
     private LocalDate dataNascimento;
 
     @NotBlank(message = "É necessário informar o cpf")

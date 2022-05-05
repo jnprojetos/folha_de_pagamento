@@ -3,16 +3,16 @@ package com.gama.academy.service;
 import com.gama.academy.dto.EnderecoDTO;
 import com.gama.academy.exception.EntidadeNaoEncontradaException;
 import com.gama.academy.mapper.EnderecoMapper;
-import com.gama.academy.model.Cargo;
 import com.gama.academy.model.Endereco;
 import com.gama.academy.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@Transactional
 public class EnderecoService {
 
     @Autowired

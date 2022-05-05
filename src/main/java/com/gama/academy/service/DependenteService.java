@@ -2,6 +2,7 @@ package com.gama.academy.service;
 
 import com.gama.academy.dto.DependenteDTO;
 import com.gama.academy.exception.EntidadeNaoEncontradaException;
+import com.gama.academy.exception.RegraNegocioException;
 import com.gama.academy.mapper.DependenteMapper;
 import com.gama.academy.mapper.FuncionarioMapper;
 import com.gama.academy.model.Dependente;
@@ -11,10 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class DependenteService {
 
     @Autowired
@@ -29,6 +32,11 @@ public class DependenteService {
     }
 
     public DependenteDTO novoDependente(DependenteDTO dependenteDTO){
+        boolean dependenteJaCadastrado = dependenteRepository.findByCpf(dependenteDTO.getCpf())
+                .stream().anyMatch(dependenteExistente -> !dependenteExistente.equals(dependenteDTO));
+        if (dependenteJaCadastrado){
+            throw new RegraNegocioException("Já existe um dependente cadastrado com esse cpf");
+        }
         Funcionario funcionario = funcionarioService.buscarPorIdEAtivo(dependenteDTO.getFuncionario().getId());
         dependenteDTO.setFuncionario(FuncionarioMapper.toFuncionarioDTO(funcionario));
         Dependente dependente = dependenteRepository.save(DependenteMapper.toDependente(dependenteDTO));

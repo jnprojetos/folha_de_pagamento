@@ -1,7 +1,6 @@
 package com.gama.academy.service;
 
 import com.gama.academy.dto.FolhaDTO;
-import com.gama.academy.dto.FuncionarioDTO;
 import com.gama.academy.enums.EnumDeducaoDependente;
 import com.gama.academy.exception.EntidadeNaoEncontradaException;
 import com.gama.academy.exception.RegraNegocioException;
@@ -9,18 +8,18 @@ import com.gama.academy.mapper.FolhaDTOMapper;
 import com.gama.academy.mapper.FuncionarioMapper;
 import com.gama.academy.model.*;
 import com.gama.academy.repository.FolhaRepository;
-import com.gama.academy.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class FolhaService {
 
     @Autowired
@@ -102,12 +101,7 @@ public class FolhaService {
         int numeroDependentes = 0;
         BigDecimal totalDeducaoDependente = BigDecimal.ZERO;
         List<Dependente> dependentes = dependenteService.listarPorFuncionario(funcionario);
-        for(int i = 0; i < dependentes.size(); i++){
-            if(dependentes.get(i).calculaIdade(dependentes.get(i).getDataNascimento()) <= 21){
-                numeroDependentes += 1;
-            }
-        }
-        if (numeroDependentes > 0){
+        if (dependentes.size() > 0){
             totalDeducaoDependente = EnumDeducaoDependente.DEDUCAO_POR_DEPENDENTE.getValor().multiply(BigDecimal.valueOf(numeroDependentes));
         }
         return totalDeducaoDependente;
