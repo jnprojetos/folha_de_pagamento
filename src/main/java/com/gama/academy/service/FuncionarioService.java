@@ -3,6 +3,7 @@ package com.gama.academy.service;
 import com.gama.academy.dto.FuncionarioDTO;
 import com.gama.academy.dto.FuncionarioDTOOutput;
 import com.gama.academy.exception.EntidadeNaoEncontradaException;
+import com.gama.academy.exception.RegraNegocioException;
 import com.gama.academy.mapper.CargoMapper;
 import com.gama.academy.mapper.EmpresaMapper;
 import com.gama.academy.mapper.EnderecoMapper;
@@ -16,8 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -35,7 +36,13 @@ public class FuncionarioService {
     @Autowired
     EnderecoService enderecoService;
 
+    @Transactional
     public FuncionarioDTOOutput novoFuncionario(FuncionarioDTO dto) {
+        boolean funcionarioAtivo = repository.findByCpfAndAtivo(dto.getCpf(), true)
+                .stream().anyMatch(funcionarioExistente -> !funcionarioExistente.equals(dto));
+        if (funcionarioAtivo){
+            throw new RegraNegocioException("Já existe um funcionário ativo com esses dados.");
+        }
         Cargo cargo = cargoService.findById(dto.getCargo().getId());
         Empresa empresa = empresaService.findById(dto.getEmpresa().getId());
         Endereco endereco = enderecoService.findById(dto.getEndereco().getId());
@@ -47,15 +54,11 @@ public class FuncionarioService {
         return FuncionarioMapper.toFuncionarioOutput(repository.save(funcionario));
     }
 
+    @Transactional
     public FuncionarioDTOOutput alterar(Long id, FuncionarioDTO dto){
         Funcionario funcionario = repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("Funcionário não encontrado."));
         dto.setId(funcionario.getId());
         return FuncionarioMapper.toFuncionarioOutput(repository.save(FuncionarioMapper.toFuncionario(dto)));
-    }
-
-    public void excluir(Long id){
-        Funcionario funcionario = repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("Funcionário não encontrado."));
-        repository.delete(funcionario);
     }
 
     public Page<FuncionarioDTOOutput> listar(Pageable pageable){

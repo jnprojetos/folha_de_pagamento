@@ -51,13 +51,6 @@ public class FuncionarioController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(service.alterar(id, dto));
     }
 
-    @DeleteMapping("/{id}")
-    @ApiOperation(value = "Excluir um funcionário")
-    public ResponseEntity<FuncionarioDTO> excluir(@Valid @PathVariable Long id) throws Exception {
-        service.excluir(id);
-        return ResponseEntity.noContent().build();
-    }
-
     @PostMapping("/demitir/{id}")
     @ApiOperation(value = "Demitir um funcionário")
     public ResponseEntity<FuncionarioDTO> demitir(@PathVariable Long id){

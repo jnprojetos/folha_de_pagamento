@@ -43,6 +43,10 @@ public class FolhaService {
 
 
     public void folhaGeral(String competencia) {
+        int comp = Integer.parseInt(competencia.substring(0,2));
+        if (comp <= 0 || comp > 13){
+            throw new RegraNegocioException("Competência inválida");
+        }
         if (folhaRepository.existsByCompetencia(competencia)) {
             throw new RegraNegocioException("Já existe uma folha de pagamento nessa competência");
         }
@@ -52,6 +56,10 @@ public class FolhaService {
     }
 
     public FolhaDTO folhaPorFuncionario(Long id, String competencia) {
+        int comp = Integer.parseInt(competencia.substring(0,2));
+        if (comp <= 0 || comp > 13){
+            throw new RegraNegocioException("Competência inválida");
+        }
         if (folhaRepository.existsByCompetencia(competencia)) {
             throw new RegraNegocioException("Já existe uma folha de pagamento nessa competência");
         }

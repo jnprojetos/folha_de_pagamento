@@ -1,5 +1,8 @@
 package com.gama.academy.dto;
 
+import org.hibernate.validator.constraints.br.CPF;
+
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -16,6 +19,7 @@ public class FuncionarioDTO {
     private LocalDate dataNascimento;
 
     @NotBlank(message = "É necessário informar o cpf")
+    @CPF(message = "CPF Inválido")
     private String cpf;
 
     @NotBlank(message = "É necessário informar o telefone")
@@ -31,6 +35,7 @@ public class FuncionarioDTO {
     private CargoDTO cargo;
 
     @NotNull(message = "É necessário informar o salário atual")
+    @Min(value = 1, message = "O salário não pode ser menor ou igual a zero")
     private BigDecimal salarioAtual;
 
     @NotNull(message = "É necessário informar a empresa do funcionário")

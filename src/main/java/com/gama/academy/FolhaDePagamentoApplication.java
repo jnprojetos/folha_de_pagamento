@@ -10,8 +10,6 @@ public class FolhaDePagamentoApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(FolhaDePagamentoApplication.class, args);
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		System.out.println(bCryptPasswordEncoder.encode("123"));
 	}
 
 
