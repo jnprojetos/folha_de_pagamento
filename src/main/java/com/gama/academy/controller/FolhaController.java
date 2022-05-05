@@ -32,7 +32,7 @@ public class FolhaController {
     @PostMapping("/competencia/{competencia}")
     public ResponseEntity<Folha> gerarFolhaGeral(@PathVariable String competencia){
         folhaService.folhaGeral(competencia);
-       return ResponseEntity.ok().build();
+       return ResponseEntity.noContent().build();
     }
 
     @ApiOperation(value = "Consultar folha de pagamento por competência")

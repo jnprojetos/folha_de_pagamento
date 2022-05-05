@@ -30,7 +30,6 @@ public class SwaggerConfig {
                 .paths(PathSelectors.ant("/**"))
                 .build()
                .ignoredParameterTypes(Usuario.class);
-
     }
 
     private ApiInfo apiInfo() {
