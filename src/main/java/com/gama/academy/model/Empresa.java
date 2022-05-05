@@ -14,7 +14,7 @@ public class Empresa {
     private String cnpj;
     private String email;
     private String telefone;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Endereco endereco;
 
     public Empresa() {

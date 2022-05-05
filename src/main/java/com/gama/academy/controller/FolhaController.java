@@ -1,6 +1,7 @@
 package com.gama.academy.controller;
 
 import com.gama.academy.dto.FolhaDTO;
+import com.gama.academy.mapper.FolhaDTOMapper;
 import com.gama.academy.model.Folha;
 import com.gama.academy.service.FolhaService;
 import io.swagger.annotations.Api;
@@ -42,8 +43,8 @@ public class FolhaController {
 
     @ApiOperation(value = "Consultar folha de pagamento por funcionário e competência")
     @GetMapping("/funcionario/{id}/competencia/{competencia}")
-    public ResponseEntity<Folha> buscarPorCompetenciaFuncionario(@PathVariable String competencia, @PathVariable Long id){
-        return ResponseEntity.status(HttpStatus.OK).body(folhaService.buscarPorCompetenciaFuncionario(competencia, id));
+    public ResponseEntity<FolhaDTO> buscarPorCompetenciaFuncionario(@PathVariable String competencia, @PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(FolhaDTOMapper.toFolhaDTO(folhaService.buscarPorCompetenciaFuncionario(competencia, id)));
     }
 
     @ApiOperation(value = "Excluir folha de pagamento por competência")

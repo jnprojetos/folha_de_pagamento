@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class CargoDTO {
 
-    private static Long id;
+    private Long id;
 
     @NotBlank(message = "CBO é obrigatório")
     private String cbo;

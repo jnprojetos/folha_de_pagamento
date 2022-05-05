@@ -6,7 +6,8 @@ public class FolhaDTO {
 
     private Long id;
     private FuncionarioResumo funcionario;
-    private EmpresaResumo empresa;
+    private String razaoSocial;
+    private String cnpj;
     private BigDecimal totalVencimento;
     private BigDecimal totalDesconto;
     private BigDecimal salarioLiquido;
@@ -16,14 +17,16 @@ public class FolhaDTO {
     private BigDecimal baseIrrf;
     private BigDecimal baseInss;
     private BigDecimal baseFgts;
-    private BigDecimal salarioFamilia;
     private String competencia;
 
-    public FolhaDTO(Long id, FuncionarioResumo funcionario, BigDecimal totalVencimento, BigDecimal totalDesconto,
-                    BigDecimal salarioLiquido, BigDecimal fgts, BigDecimal inss, BigDecimal irrf, BigDecimal baseIrrf, BigDecimal baseInss,
-                    BigDecimal baseFgts, BigDecimal salarioFamilia, String competencia) {
+    public FolhaDTO(Long id, FuncionarioResumo funcionario, String razaoSocial, String cnpj,
+                    BigDecimal totalVencimento, BigDecimal totalDesconto, BigDecimal salarioLiquido,
+                    BigDecimal fgts, BigDecimal inss, BigDecimal irrf, BigDecimal baseIrrf,
+                    BigDecimal baseInss, BigDecimal baseFgts, String competencia) {
         this.id = id;
         this.funcionario = funcionario;
+        this.razaoSocial = razaoSocial;
+        this.cnpj = cnpj;
         this.totalVencimento = totalVencimento;
         this.totalDesconto = totalDesconto;
         this.salarioLiquido = salarioLiquido;
@@ -33,7 +36,6 @@ public class FolhaDTO {
         this.baseIrrf = baseIrrf;
         this.baseInss = baseInss;
         this.baseFgts = baseFgts;
-        this.salarioFamilia = salarioFamilia;
         this.competencia = competencia;
     }
 
@@ -53,12 +55,12 @@ public class FolhaDTO {
         this.funcionario = funcionario;
     }
 
-    public EmpresaResumo getEmpresa() {
-        return empresa;
+    public String getRazaoSocial() {
+        return razaoSocial;
     }
 
-    public void setEmpresa(EmpresaResumo empresa) {
-        this.empresa = empresa;
+    public String getCnpj() {
+        return cnpj;
     }
 
     public BigDecimal getTotalVencimento() {
@@ -131,14 +133,6 @@ public class FolhaDTO {
 
     public void setBaseFgts(BigDecimal baseFgts) {
         this.baseFgts = baseFgts;
-    }
-
-    public BigDecimal getSalarioFamilia() {
-        return salarioFamilia;
-    }
-
-    public void setSalarioFamilia(BigDecimal salarioFamilia) {
-        this.salarioFamilia = salarioFamilia;
     }
 
     public String getCompetencia() {

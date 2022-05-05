@@ -1,26 +1,40 @@
 package com.gama.academy.mapper;
 
 import com.gama.academy.dto.FuncionarioDTO;
+import com.gama.academy.dto.FuncionarioDTOOutput;
 import com.gama.academy.model.Funcionario;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class FuncionarioMapper {
 
     public static Funcionario toFuncionario(FuncionarioDTO dto){
-        return new Funcionario(dto.getId(), dto.getNome(), dto.getDataNascimento(), dto.getCpf(), dto.getMatricula(), dto.getTelefone(), dto.getEmail(), dto.getDataAdmissao(), dto.getUnidadeSalarial(), dto.getSalarioAtual(), dto.getNumeroConta(), dto.getAgenciaConta(), dto.getTipoConta(), dto.getCodigoBanco(), CargoMapper.toCargo(dto.getCargo()), EmpresaMapper.toEmpresa(dto.getEmpresa()), EnderecoMapper.toEndereco(dto.getEmpresa().getEndereco()));
+        return new Funcionario(dto.getId(), dto.getNome(), dto.getDataNascimento(), dto.getCpf(),
+                dto.getTelefone(), dto.getEmail(), dto.getDataAdmissao(),
+                CargoMapper.toCargo(dto.getCargo()), dto.getSalarioAtual(),
+                EnderecoMapper.toEndereco(dto.getEndereco()), EmpresaMapper.toEmpresa(dto.getEmpresa()));
     }
 
-    public static FuncionarioDTO toFuncionarioDTO(Funcionario funcionario){
-        return new FuncionarioDTO(funcionario.getId(), funcionario.getNome(), funcionario.getDataNascimento(), funcionario.getCpf(), funcionario.getMatricula(), funcionario.getTelefone(), funcionario.getEmail(), funcionario.getDataAdmissao(),
-            funcionario.isAtivo(), funcionario.getUnidadesSalarial(), funcionario.getSalarioAtual(), funcionario.getNumeroConta(), funcionario.getAgenciaConta(), funcionario.getTipoConta(), funcionario.getCodigoBanco(), CargoMapper.toCargoDTO(funcionario.getCargo()), EmpresaMapper.toEmpresaDTO(funcionario.getEmpresa()), EnderecoMapper.toEnderecoDTO(funcionario.getEmpresa().getEndereco()));
+    public static FuncionarioDTOOutput toFuncionarioOutput(Funcionario funcionario){
+        return new FuncionarioDTOOutput(
+                funcionario.getId(), funcionario.getNome(), funcionario.getDataNascimento(), funcionario.getCpf(),
+                funcionario.getTelefone(), funcionario.getEmail(), funcionario.getDataAdmissao(), funcionario.getDataDesligamento(),
+                funcionario.isAtivo(), CargoMapper.toCargoDTO(funcionario.getCargo()), funcionario.getSalarioAtual(),
+                EmpresaMapper.toEmpresaDTO(funcionario.getEmpresa()),
+                EnderecoMapper.toEnderecoDTO(funcionario.getEndereco()));
     }
 
-    public static List<FuncionarioDTO> toListFuncionarioDTO(List<Funcionario> funcionarios){
-       if(funcionarios != null){
-          return funcionarios.stream().map(funcionario -> toFuncionarioDTO(funcionario)).collect(Collectors.toList());
-       }
-       return null;
+    public static Funcionario funcionarioOutputToFuncionario(FuncionarioDTOOutput dtoOutput){
+        return new Funcionario(
+                dtoOutput.getId(), dtoOutput.getNome(), dtoOutput.getDataNascimento(), dtoOutput.getCpf(), dtoOutput.getTelefone(),
+                dtoOutput.getEmail(), dtoOutput.getDataAdmissao(), CargoMapper.toCargo(dtoOutput.getCargo()), dtoOutput.getSalario(),
+                EnderecoMapper.toEndereco(dtoOutput.getEndereco()), EmpresaMapper.toEmpresa(dtoOutput.getEmpresa())
+        );
+    }
+
+    public static FuncionarioDTO toFuncionarioDTO(Funcionario funcionario) {
+        return new FuncionarioDTO(
+                funcionario.getId(), funcionario.getNome(), funcionario.getDataNascimento(), funcionario.getCpf(),
+                funcionario.getTelefone(), funcionario.getEmail(), funcionario.getDataAdmissao(), CargoMapper.toCargoDTO(funcionario.getCargo()),
+                funcionario.getSalarioAtual(), EmpresaMapper.toEmpresaDTO(funcionario.getEmpresa()), EnderecoMapper.toEnderecoDTO(funcionario.getEndereco())
+        );
     }
 }

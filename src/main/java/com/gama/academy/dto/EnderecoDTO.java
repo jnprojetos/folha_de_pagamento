@@ -1,5 +1,7 @@
 package com.gama.academy.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
@@ -13,6 +15,7 @@ public class EnderecoDTO {
     @NotBlank(message = "É necessário informar o número do endereço")
     String numero;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     String complemento;
 
     @NotBlank(message = "É necessário informar o bairro")

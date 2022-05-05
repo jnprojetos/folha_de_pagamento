@@ -36,10 +36,16 @@ public class CargoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(cargoService.novoCargo(cargoDTO));
     }
 
-    @PutMapping(name = "/{id}", produces = "application/json")
+    @PutMapping(value = "/{id}", produces = "application/json")
     @ApiOperation(value = "Alterar um cargo")
     public ResponseEntity<CargoDTO> alterar(@Valid @PathVariable Long id, @RequestBody CargoDTO cargoDTO){
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(cargoService.alterar(id, cargoDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CargoDTO> excluir(@PathVariable Long id){
+        cargoService.excluir(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -46,10 +46,12 @@ public class EmpresaService {
     }
 
     public Empresa findById(Long id){
-        Optional<Empresa> empresa = empresaRepository.findById(id);
-        if(empresa.isPresent()){
-            return empresa.get();
-        }
-        return null;
+        Empresa empresa = empresaRepository.findById(id).orElseThrow(()-> new EntidadeNaoEncontradaException("Empresa não encontrada"));
+        return empresa;
+    }
+
+    public void excluir(Long id){
+        Empresa empresa = findById(id);
+        empresaRepository.delete(empresa);
     }
 }

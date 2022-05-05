@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,11 +65,11 @@ public class FolhaService {
 
     private Folha gerarFolha(Funcionario funcionario, String competencia) {
         BigDecimal valorDeducaoDependente = BigDecimal.ZERO;
-        valorDeducaoDependente = calcularDeducacaoImpostoRenda(funcionario);
+        valorDeducaoDependente = calcularDeducacaoImpostoRenda(funcionario).setScale(2, RoundingMode.HALF_EVEN);
         BigDecimal valorInss = BigDecimal.ZERO;
-        valorInss = valorInss.add(inss.calcularInss(funcionario.getSalarioAtual()));
+        valorInss = valorInss.add(inss.calcularInss(funcionario.getSalarioAtual())).setScale(2, RoundingMode.HALF_EVEN);
         BigDecimal valoIrrf = BigDecimal.ZERO;
-        valoIrrf = ir.calcularImpostoRenda(funcionario.getSalarioAtual().subtract(valorInss).subtract(valorDeducaoDependente));
+        valoIrrf = ir.calcularImpostoRenda(funcionario.getSalarioAtual().subtract(valorInss).subtract(valorDeducaoDependente)).setScale(2, RoundingMode.HALF_EVEN);
 
         Folha folha = new Folha();
         folha.setCompetencia(competencia);
@@ -80,6 +81,7 @@ public class FolhaService {
         folha.setInss(valorInss);
         folha.setIrrf(valoIrrf);
         folha.setTotalDesconto(valorInss.add(valoIrrf));
+        folha.setTotalVencimento(funcionario.getSalarioAtual());
         folha.setSalarioLiquido(funcionario.getSalarioAtual().subtract(valoIrrf.add(valorInss)));
         return folhaRepository.save(folha);
     }
@@ -104,8 +106,10 @@ public class FolhaService {
     }
 
     public Folha buscarPorCompetenciaFuncionario(String competencia, Long id){
-        Funcionario funcionario = FuncionarioMapper.toFuncionario(funcionarioService.buscarPorId(id));
-        return folhaRepository.findByCompetenciaAndFuncionario(competencia, funcionario).get();
+        Funcionario funcionario = FuncionarioMapper.funcionarioOutputToFuncionario(funcionarioService.buscarPorId(id));
+
+        return folhaRepository.findByCompetenciaAndFuncionario(competencia, funcionario).orElseThrow(
+                ()-> new EntidadeNaoEncontradaException("Não existe folha gerada nessa competência"));
     }
 
     public void excluirFolhaPorCompetencia(String competencia, Pageable pageable){

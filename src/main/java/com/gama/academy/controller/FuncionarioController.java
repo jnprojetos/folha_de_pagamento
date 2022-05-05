@@ -1,8 +1,14 @@
 package com.gama.academy.controller;
 
 import com.gama.academy.dto.FuncionarioDTO;
+import com.gama.academy.dto.FuncionarioDTOOutput;
 import com.gama.academy.service.FuncionarioService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,33 +21,47 @@ import java.util.List;
 
 @RestController
 @RequestMapping("v1/funcionarios")
+@Api(tags = "Funcionários")
 public class FuncionarioController {
 
     @Autowired
     private FuncionarioService service;
 
     @GetMapping(produces = "application/json")
-    public ResponseEntity<List<FuncionarioDTO>> listar(){
-        return ResponseEntity.ok(service.listar());
+    @ApiOperation(value = "Listar todos os funcionários")
+    public ResponseEntity<Page<FuncionarioDTOOutput>> listar(@PageableDefault Pageable pageable){
+        return ResponseEntity.ok(service.listar(pageable));
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation(value = "Listar funcionário por id")
+    public ResponseEntity<FuncionarioDTOOutput> buscarPorId(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(service.buscarPorId(id));
     }
 
     @PostMapping(produces = "application/json")
-    public ResponseEntity<FuncionarioDTO> salvar(@Valid @RequestBody FuncionarioDTO dto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.salvar(dto));
+    @ApiOperation(value = "Incluir um novo funcionário")
+    public ResponseEntity<FuncionarioDTOOutput> adicionar(@Valid @RequestBody FuncionarioDTO dto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.novoFuncionario(dto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<FuncionarioDTO> alterar(@Valid @PathVariable Long id, @RequestBody FuncionarioDTO dto){
+    @ApiOperation(value = "Alterar um funcionário")
+    public ResponseEntity<FuncionarioDTOOutput> alterar(@Valid @PathVariable Long id, @RequestBody FuncionarioDTO dto){
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(service.alterar(id, dto));
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "Excluir um funcionário")
     public ResponseEntity<FuncionarioDTO> excluir(@Valid @PathVariable Long id) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(service.excluir(id));
+        service.excluir(id);
+        return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/dataHoje")
-    public ResponseEntity<String>getData(){
-        return ResponseEntity.status(HttpStatus.OK).body(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")).toString());
+    @PostMapping("/demitir/{id}")
+    @ApiOperation(value = "Demitir um funcionário")
+    public ResponseEntity<FuncionarioDTO> demitir(@PathVariable Long id){
+        service.demitir(id);
+        return ResponseEntity.noContent().build();
     }
 }

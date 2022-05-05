@@ -31,16 +31,18 @@ public class CargoService {
     }
 
     public CargoDTO alterar(Long id, CargoDTO cargoDTO) {
-        Cargo cargo = cargoRepository.findById(id).orElseThrow(()-> new EntidadeNaoEncontradaException("Cargo não encontrado"));
+        Cargo cargo = findById(id);
         cargoDTO.setId(cargo.getId());
         return CargoMapper.toCargoDTO(cargoRepository.save(CargoMapper.toCargo(cargoDTO)));
     }
 
     public Cargo findById(Long id){
-        Optional<Cargo> cargo = cargoRepository.findById(id);
-        if(cargo.isPresent()){
-            return cargo.get();
-        }
-        return null;
+        Cargo cargo = cargoRepository.findById(id).orElseThrow(()-> new EntidadeNaoEncontradaException("Cargo não encontrado"));
+        return cargo;
+    }
+
+    public void excluir(Long id){
+        Cargo cargo = findById(id);
+        cargoRepository.delete(cargo);
     }
 }

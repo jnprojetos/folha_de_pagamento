@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public enum EnumDeducaoDependente {
 
-    DEDUCAO_POR_DEPENDENTE(BigDecimal.valueOf(142.80));
+    DEDUCAO_POR_DEPENDENTE(BigDecimal.valueOf(189.59));
 
     private BigDecimal valor;
 
