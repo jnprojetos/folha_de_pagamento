@@ -20,8 +20,12 @@ Sprint 3️⃣ Status: Concluído ✅
 API que faz o gerenciamento da folha de pagamentos e que permite as seguintes operações:
 
 * Acompanhar horas :watch:
-* Calcular salários :moneybag:
-* reter impostos e outras deduções :customs:
+* Inclusão, alteração, consulta e exclusão de funcionários.
+* Inclusão, alteração, consulta e exclusão de dependentes.
+* Inclusão, alteração, consulta e exclusão de cargos.
+* Autenticação e autorização de acesso via token.
+* Geração de folha de pagamentos :moneybag:
+* Cálculo de impostos trabalhahistas, FGTS, IRRF e FGTS :customs:
 * imprimir e entregar cheques 🖨️ [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅]
 * Pagar impostos trabalhistas ao governo :customs:
 
