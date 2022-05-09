@@ -47,6 +47,15 @@ O diagrama Entidade Relacionamento é composto por um conjunto de objetos gráfi
 
 ![Projeto no MySQL](https://github.com/jnprojetos/folha_de_pagamento/blob/main/modeloER.png)
 
+## Diagrama de classes:
+
+A construção das classes JAVA, foi baseado no padrão MVC(Model-View-Controller).
+
+![Projeto no MySQL](https://github.com/jnprojetos/folha_de_pagamento/blob/main/modelagem%20de%20classes.jpg)
+
+
+
+
 # Tecnologias e Frameworks utilizados:
 
 | Tech or Frame |	OpenJDK ☕ |	Intellij IDE | Spring Boot 🍃 | Spring Security 🔒 | Swagger 📄 |	Postman 👨🏿‍🚀	| MySQL 🐬|
