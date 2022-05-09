@@ -22,30 +22,30 @@ public class EmpresaController {
     private EmpresaService empresaService;
 
     @ApiOperation(value = "Listar todas as empresas")
-    @GetMapping
+    @GetMapping(produces = "application/json")
     public ResponseEntity<List<EmpresaDTO>> listar(){
       return ResponseEntity.ok(empresaService.listarTodos());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = "application/json")
     @ApiOperation(value = "Listar empresa por id")
     public ResponseEntity<EmpresaDTO> buscarPorId(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(EmpresaMapper.toEmpresaDTO(empresaService.findById(id)));
     }
 
-    @PostMapping
+    @PostMapping(produces = "application/json")
     @ApiOperation(value = "Incluir uma nova empresa")
     public ResponseEntity<EmpresaDTO> adicionar(@Valid @RequestBody EmpresaDTO empresaDTO){
         return ResponseEntity.status(HttpStatus.CREATED).body(empresaService.novaEmpresa(empresaDTO));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", produces = "application/json")
     @ApiOperation(value = "Alterar uma empresa")
     public ResponseEntity<EmpresaDTO> alterar(@Valid @PathVariable Long id, @RequestBody EmpresaDTO empresaDTO){
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(empresaService.alterarEmpresa(id, empresaDTO));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}", produces = "application/json")
     @ApiOperation(value = "Excluir uma empresa")
     public ResponseEntity<EmpresaDTO> excluir(@PathVariable Long id){
         empresaService.excluir(id);

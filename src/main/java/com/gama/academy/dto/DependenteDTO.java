@@ -1,5 +1,6 @@
 package com.gama.academy.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.NotBlank;

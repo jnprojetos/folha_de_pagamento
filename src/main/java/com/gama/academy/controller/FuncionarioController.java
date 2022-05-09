@@ -33,7 +33,7 @@ public class FuncionarioController {
         return ResponseEntity.ok(service.listar(pageable));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = "application/json")
     @ApiOperation(value = "Listar funcionário por id")
     public ResponseEntity<FuncionarioDTOOutput> buscarPorId(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(service.buscarPorId(id));
@@ -45,13 +45,13 @@ public class FuncionarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.novoFuncionario(dto));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", produces = "application/json")
     @ApiOperation(value = "Alterar um funcionário")
     public ResponseEntity<FuncionarioDTOOutput> alterar(@Valid @PathVariable Long id, @RequestBody FuncionarioDTO dto){
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(service.alterar(id, dto));
     }
 
-    @PostMapping("/demitir/{id}")
+    @PostMapping(value = "/demitir/{id}", produces = "application/json")
     @ApiOperation(value = "Demitir um funcionário")
     public ResponseEntity<FuncionarioDTO> demitir(@PathVariable Long id){
         service.demitir(id);

@@ -24,7 +24,7 @@ public class CargoController {
     @Autowired
     private CargoService cargoService;
 
-    @GetMapping
+    @GetMapping(produces = "application/json")
     @ApiOperation(value = "Listar todos cargos")
     public ResponseEntity<Page<CargoDTO>> listar(@PageableDefault Pageable pageable){
         return ResponseEntity.ok(cargoService.listarTodos(pageable));
@@ -42,7 +42,7 @@ public class CargoController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(cargoService.alterar(id, cargoDTO));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<CargoDTO> excluir(@PathVariable Long id){
         cargoService.excluir(id);
         return ResponseEntity.noContent().build();

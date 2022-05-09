@@ -98,11 +98,10 @@ public class FolhaService {
     }
 
     private BigDecimal calcularDeducacaoImpostoRenda(Funcionario funcionario){
-        int numeroDependentes = 0;
         BigDecimal totalDeducaoDependente = BigDecimal.ZERO;
         List<Dependente> dependentes = dependenteService.listarPorFuncionario(funcionario);
         if (dependentes.size() > 0){
-            totalDeducaoDependente = EnumDeducaoDependente.DEDUCAO_POR_DEPENDENTE.getValor().multiply(BigDecimal.valueOf(numeroDependentes));
+            totalDeducaoDependente = EnumDeducaoDependente.DEDUCAO_POR_DEPENDENTE.getValor().multiply(BigDecimal.valueOf(dependentes.size()));
         }
         return totalDeducaoDependente;
     }

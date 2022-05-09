@@ -20,26 +20,26 @@ public class EnderecoController {
     @Autowired
     private EnderecoService service;
 
-    @GetMapping
+    @GetMapping(produces = "application/json")
     @ApiOperation(value = "Listar Todos Endereços")
     public ResponseEntity<List<EnderecoDTO>> listar(){
         return ResponseEntity.ok(service.listar());
     }
 
-    @PostMapping
+    @PostMapping(produces = "application/json")
     @ApiOperation(value = "Inclur novo endereço")
     public ResponseEntity<EnderecoDTO> salvar(@Valid @RequestBody EnderecoDTO dto){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.salvar(dto));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", produces = "application/json")
     @ApiOperation(value = "Alterar Endereço")
     public ResponseEntity<EnderecoDTO> alterar(@Valid @PathVariable Long id, @RequestBody EnderecoDTO dto){
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(service.alterar(id, dto));
     }
 
     @ApiOperation(value = "Excluir um endereço")
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<EnderecoDTO> excluir(@Valid @PathVariable Long id) throws Exception {
         service.excluir(id);
         return ResponseEntity.noContent().build();

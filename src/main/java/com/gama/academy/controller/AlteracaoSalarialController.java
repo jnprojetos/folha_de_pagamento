@@ -20,13 +20,13 @@ public class AlteracaoSalarialController {
     private AlteracaoSalarialService alteracaoSalarialService;
 
     @ApiOperation(value = "Incluri nova alteraçã salarial para um funcionário")
-    @PostMapping("/{id_funcionario}")
+    @PostMapping(value = "/{id_funcionario}", produces = "application/json")
     public ResponseEntity<AlteracaoSalarial> novaAlteracao(@PathVariable Long id_funcionario, @RequestBody AlteracaoSalarial alteracaoSalarial){
         return ResponseEntity.status(HttpStatus.CREATED).body(alteracaoSalarialService.novaAlteracao(id_funcionario, alteracaoSalarial));
     }
 
     @ApiOperation(value = "Listar alterações salariais por funcionário")
-    @GetMapping("/{id_funcionario}")
+    @GetMapping(value = "/{id_funcionario}", produces = "application/json")
     public ResponseEntity<List<AlteracaoSalarial>> listarPorFuncionario(@PathVariable Long id_funcionario){
         return ResponseEntity.status(HttpStatus.OK).body(alteracaoSalarialService.listarAlteracaoPorFuncionario(id_funcionario));
     }

@@ -45,6 +45,8 @@ public class DependenteService {
 
     public DependenteDTO alterar(Long id, DependenteDTO dependenteDTO){
         Dependente dependente = dependenteRepository.findById(id).orElseThrow(()-> new EntidadeNaoEncontradaException("Dependente não encontrado"));
+        Funcionario funcionario = funcionarioService.buscarPorIdEAtivo(dependenteDTO.getFuncionario().getId());
+        dependenteDTO.setFuncionario(FuncionarioMapper.toFuncionarioDTO(funcionario));
         dependenteDTO.setId(dependente.getId());
         return DependenteMapper.toDependenteDTO(dependenteRepository.save(DependenteMapper.toDependente(dependenteDTO)));
     }
