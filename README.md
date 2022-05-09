@@ -20,8 +20,12 @@ Sprint 3️⃣ Status: Concluído ✅
 API que faz o gerenciamento da folha de pagamentos e que permite as seguintes operações:
 
 * Acompanhar horas :watch:
-* Calcular salários :moneybag:
-* reter impostos e outras deduções :customs:
+* Inclusão, alteração, consulta e exclusão de funcionários.
+* Inclusão, alteração, consulta e exclusão de dependentes.
+* Inclusão, alteração, consulta e exclusão de cargos.
+* Autenticação e autorização de acesso via token.
+* Geração de folha de pagamentos :moneybag:
+* Cálculo de impostos trabalhahistas, FGTS, IRRF e FGTS :customs:
 * imprimir e entregar cheques 🖨️ [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅]
 * Pagar impostos trabalhistas ao governo :customs:
 
@@ -35,15 +39,19 @@ API que faz o gerenciamento da folha de pagamentos e que permite as seguintes op
 
 ![Projeto no Jira](https://github.com/jnprojetos/folha_de_pagamento/blob/main/Jira.png)
 
-# Modelagem do Software
+# Modelagem de Software: 
 
-## Diagrama de classes:
+## Diagrama ER do banco de dados:
+
+O diagrama Entidade Relacionamento é composto por um conjunto de objetos gráficos que visa representar todos os objetos do modelo Entidade-Relacionamento tais como entidades, atributos, atributos chaves, relacionamentos, restrições estruturais, etc. O diagrama ER fornece uma visão lógica do banco de dados, fornecendo um conceito mais generalizado de como estão estruturados os dados de um sistema.
+
+![Projeto no MySQL](https://github.com/jnprojetos/folha_de_pagamento/blob/main/modeloER.png)
 
 # Tecnologias e Frameworks utilizados:
 
 | Tech or Frame |	OpenJDK ☕ |	Intellij IDE | Spring Boot 🍃 | Spring Security 🔒 | Swagger 📄 |	Postman 👨🏿‍🚀	| MySQL 🐬|
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| Version	| 11 64-bit |	2022.1 | 2.6.7 | 5.0.0 | 2.0.0 | 9.15.2 | 64-bit 8.0.28.0 |
+| Version	| 11 64-bit |	2022.1 | 2.6.6 | 5.0.0 | 2.9.2 | 9.15.2 | 64-bit 8.0.28.0 |
 
 # Como executar a aplicação:
 
@@ -58,6 +66,13 @@ API que faz o gerenciamento da folha de pagamentos e que permite as seguintes op
 9. Instalar o Postman ou alguma plataforma de API da sua escolha.
 10. Execute a plataforma de API e insira os EndPoints presentes no arquivo .JSON do projeto.
 11. Execute as requisições.
+
+
+
+
+
+
+
 
 
 
