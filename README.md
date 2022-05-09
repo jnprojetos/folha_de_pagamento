@@ -47,7 +47,7 @@ API que faz o gerenciamento da folha de pagamentos e que permite as seguintes op
 
 | Tech or Frame |	OpenJDK ☕ |	Intellij IDE | Spring Boot 🍃 | Spring Security 🔒 | Swagger 📄 |	Postman 👨🏿‍🚀	| MySQL 🐬|
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| Version	| 11 64-bit |	2022.1 | 2.6.6 | 5.0.0 | 2.0.0 | 9.15.2 | 64-bit 8.0.28.0 |
+| Version	| 11 64-bit |	2022.1 | 2.6.6 | 5.0.0 | 2.9.2 | 9.15.2 | 64-bit 8.0.28.0 |
 
 # Como executar a aplicação:
 
