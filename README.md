@@ -39,9 +39,13 @@ API que faz o gerenciamento da folha de pagamentos e que permite as seguintes op
 
 ![Projeto no Jira](https://github.com/jnprojetos/folha_de_pagamento/blob/main/Jira.png)
 
-# Modelagem do Software
+# Modelagem de Software: 
 
-## Diagrama de classes:
+## Diagrama ER do banco de dados:
+
+O diagrama Entidade Relacionamento é composto por um conjunto de objetos gráficos que visa representar todos os objetos do modelo Entidade-Relacionamento tais como entidades, atributos, atributos chaves, relacionamentos, restrições estruturais, etc. O diagrama ER fornece uma visão lógica do banco de dados, fornecendo um conceito mais generalizado de como estão estruturados os dados de um sistema.
+
+![Projeto no MySQL](https://github.com/jnprojetos/folha_de_pagamento/blob/main/modeloER.png)
 
 # Tecnologias e Frameworks utilizados:
 
@@ -62,6 +66,13 @@ API que faz o gerenciamento da folha de pagamentos e que permite as seguintes op
 9. Instalar o Postman ou alguma plataforma de API da sua escolha.
 10. Execute a plataforma de API e insira os EndPoints presentes no arquivo .JSON do projeto.
 11. Execute as requisições.
+
+
+
+
+
+
+
 
 
 
