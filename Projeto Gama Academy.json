@@ -1,0 +1,945 @@
+{
+	"info": {
+		"_postman_id": "6d058ab6-92d5-4df9-ab32-c50a749b3113",
+		"name": "Projeto Gama Academy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Depentendete",
+			"item": [
+				{
+					"name": "Adicionar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Joao Carlos\",\r\n    \"cpf\": \"18448353242\",\r\n    \"dataNascimento\":\"2000-10-10\",\r\n    \"funcionario\": {\r\n        \"id\": 4\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/dependentes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dependentes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/dependentes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dependentes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Josimar 2\",\r\n    \"cpf\": \"74109411033\",\r\n    \"dataNascimento\":\"2000-09-01\",\r\n    \"funcionario\": {\r\n        \"id\": 4\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/dependentes/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dependentes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca Dependente Por Funcionário",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/dependentes/4",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dependentes",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "FOlha",
+			"item": [
+				{
+					"name": "Gerar Folha Por Funcionario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/fechamentos/funcionario/4/competencia/07-2022",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"fechamentos",
+								"funcionario",
+								"4",
+								"competencia",
+								"07-2022"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gerar Folha Todos Funcionarios",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/fechamentos/competencia/02-2022",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"fechamentos",
+								"competencia",
+								"02-2022"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Folha Por Competência",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"funcionario\":{\r\n        \"id\": 1\r\n    },\r\n    \"competencia\": \"2022-03-09\",\r\n    \"referencia\": 30,\r\n    \"tipo\": \"Provento\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/fechamentos/competencia/08-2022",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"fechamentos",
+								"competencia",
+								"08-2022"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Folha Por Competencia",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"funcionario\":{\r\n        \"id\": 1\r\n    },\r\n    \"competencia\": \"2022-03-09\",\r\n    \"referencia\": 30,\r\n    \"tipo\": \"Provento\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/fechamentos/competencia/03-2022",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"fechamentos",
+								"competencia",
+								"03-2022"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Competencia e Funcionário",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"funcionario\":{\r\n        \"id\": 1\r\n    },\r\n    \"competencia\": \"2022-03-09\",\r\n    \"referencia\": 30,\r\n    \"tipo\": \"Provento\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/fechamentos/funcionario/1/competencia/02-2022",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"fechamentos",
+								"funcionario",
+								"1",
+								"competencia",
+								"02-2022"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Funcionário",
+			"item": [
+				{
+					"name": "Adicionar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Paulo dias\",\r\n    \"dataNascimento\": \"2022-10-10\",\r\n    \"cpf\": \"08504962172\",\r\n    \"telefone\": \"1146987447\",\r\n    \"email\": \"sandra@gmail.com\",\r\n    \"dataAdmissao\": \"2021-11-03\",\r\n    \"cargo\": {\r\n        \"id\": 1\r\n    },\r\n    \"salarioAtual\": 3850.90,\r\n    \"empresa\": {\r\n        \"id\": 1\r\n    },\r\n        \"endereco\": {\r\n            \"id\": 2\r\n        }\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/funcionarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"funcionarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar Funcionário",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Paulo dias da silva\",\r\n    \"dataNascimento\": \"1987-07-25\",\r\n    \"cpf\": \"08504962172\",\r\n    \"telefone\": \"1146987447\",\r\n    \"email\": \"sandra@gmail.com\",\r\n    \"dataAdmissao\": \"2021-11-04\",\r\n    \"cargo\": {\r\n        \"id\": 2\r\n    },\r\n    \"salarioAtual\": 1212,\r\n    \"empresa\": {\r\n        \"id\": 2\r\n    },\r\n        \"endereco\": {\r\n            \"id\": 2\r\n        }\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/funcionarios/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"funcionarios",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Funcionario Por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/funcionarios/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"funcionarios",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Demitir Funcionario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/funcionarios/demitir/5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"funcionarios",
+								"demitir",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todos Funcionarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/funcionarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"funcionarios"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Autenticação",
+			"item": [
+				{
+					"name": "Gerar Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"senha\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Novo Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Josimar\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"senha\": \"123\",\r\n    \"perfil\":{\r\n        \"id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/usuarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cargo",
+			"item": [
+				{
+					"name": "Listar cargos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cargos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cargos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Cargo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cargos/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cargos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar endereços",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cbo\" : \"5650\",\r\n    \"descricao\": \"Atendente\",\r\n    \"pisoSalarial\" : \"900\",\r\n    \"tetoSalarial\": \"1500\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cargos/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cargos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Novo Cargo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cbo\" : \"5050\",\r\n    \"descricao\": \"Vendedor\",\r\n    \"pisoSalarial\" : \"500\",\r\n    \"tetoSalarial\": \"1800\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cargos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cargos"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Collections dos endpoints de endereço",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Empresa",
+			"item": [
+				{
+					"name": "Nova Empresa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nomeFantasia\": \"Loja do Ze\",\r\n    \"razaoSocial\": \"Loja do Ze LTDA\",\r\n    \"cnpj\": \"43.738.052/0001-72\",\r\n    \"endereco\":{\r\n        \"id\": 1\r\n    },\r\n    \"email\": \"lojadoze@gmail.com\",\r\n    \"telefone\": \"5555-99999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/empresas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"empresas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Empresas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/empresas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"empresas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar Empresa",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nomeFantasia\": \"Loja do Joao\",\r\n    \"razaoSocial\": \"Loja do Joao LTDA\",\r\n    \"cnpj\": \"02025367000195\",\r\n    \"endereco\":{\r\n        \"id\": 2\r\n    },\r\n    \"email\": \"lojadojoao@gmail.com\",\r\n    \"telefone\": \"8888-99999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/empresas/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"empresas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Empresa",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/empresas/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"empresas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Empresa Por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/empresas/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"empresas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Endereço",
+			"item": [
+				{
+					"name": "Novo Endereço",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"logradouro\" : \"Rua primavera\",\r\n    \"numero\" : \"222\",\r\n    \"bairro\": \"Centro\",\r\n    \"cidade\" : \"Campinas\",\r\n    \"uf\" : \"SP\",\r\n    \"pais\" : \"Brasil\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/enderecos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"enderecos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar todos endereços",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/enderecos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"enderecos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar endereços",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"logradouro\": \"rua alterada\",\r\n        \"numero\": \"9999\",\r\n        \"complemento\": \"complemento\",\r\n        \"bairro\": \"centro\",\r\n        \"cidade\": \"lambari\",\r\n        \"uf\": \"MG\",\r\n        \"pais\": \"Japao\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/enderecos/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"enderecos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Endereço",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/enderecos/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"enderecos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Alteração Salarial",
+			"item": [
+				{
+					"name": "Alterar Salario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"motivo\": \"TEste\",\r\n    \"novoSalario\": 21000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/alteracoes-salariais/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"alteracoes-salariais",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulta Alteração Salarial",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/alteracoes-salariais/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"alteracoes-salariais",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Novo Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Samantha\",]\"email\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/usuarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
